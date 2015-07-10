@@ -1,0 +1,3 @@
+#!/bin/bash
+ssh $BM_SERVER rm -rf $BM_REMOTE_ROOT
+bm_sync

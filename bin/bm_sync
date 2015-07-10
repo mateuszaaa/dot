@@ -1,0 +1,54 @@
+#!/bin/bash
+
+#======================================================================
+# 
+# Script synchronize your remote repo with your local repo.
+# IT SHOULD BE RUN ON WRLING!!
+# example:
+#
+# sync_git && make fsmf_test
+#
+# OPTIONS:
+# sync_git - syncs only differences
+# sync_git -d - sync with full cleanup of wrling repo
+# sync_git -i - sync without .git and .svn hidden directories (shotren the time but unables you to use git or svn on wrling)
+#
+# CONFIG:
+# Write your LOCAL repository dir (the dir where BTS_SC_BM is) example:
+# Write your REMOTE repository dir (the dir where BTS_SC_BM is) example:
+#
+#======================================================================
+
+
+# retrieve local IP
+FROM=$BM_LOCAL_ROOT
+echo $FROM
+TO=$BM_SERVER:$BM_REMOTE_ROOT
+echo $TO
+
+if [ -z "$BM_LOCAL_ROOT" ]; then
+    echo "BM_LOCAL_ROOT ENV not set"
+fi
+
+if [ -z "$BM_SERVER" ]; then
+    echo "BM_SERVER ENV not set"
+fi
+
+if [ -z "$BM_REMOTE_ROOT" ]; then
+    echo "BM_REMOTE_ROOT ENV not set"
+fi
+
+# set delete flag
+
+# set sync excludes (backup file, qt creatot project files, Global_Env and Platform_Env directories etc.)
+EXCLUDES='--exclude *_Env --exclude *.pro --exclude *_bak --exclude *.creator* --exclude *.files* --exclude *.includes* --exclude *.config'
+VCS_EXCLUDES='--exclude *.svn --exclude *.git'
+
+# if [ "$1" = "-e" -o "$2" = "-e" -o "$3" = "-e" ]; then
+    # echo "EXCLUDE"
+EXCLUDES="$EXCLUDES $VCS_EXCLUDES"
+# fi
+# sync repositories
+# rsync -avt $DELETE_FLAG $EXCLUDES $IP:$LOCAL_DIR $WRLING_DIR
+rsync -avt $EXCLUDES $FROM $TO
+

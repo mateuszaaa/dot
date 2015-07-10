@@ -15,7 +15,7 @@ function copybash() {
 }
 
 function ffind() {
-    ffind -iname "*$1*"
+    find -iname "*$1*"
 }
 
 function ggrep() {

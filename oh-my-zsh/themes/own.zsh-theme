@@ -1,7 +1,7 @@
 # AVIT ZSH Theme
 
 PROMPT='
-$FG[063]%T $(_user_host)${_current_dir} $(git_prompt_info) 
+$FG[063]%T $(_user_host)${_current_dir} $FG[202][$(git_prompt_info)$FG[202]]
 $(_color_for_user)-> %{$reset_color%}'
 
 #▶
