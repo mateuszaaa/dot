@@ -1,0 +1,27 @@
+#!/bin/bash
+
+alias kkil='killall'
+alias ls='ls --color=auto'
+alias ssh='ssh -Y'
+
+function copybash() {
+    ssh $1 "rm -rf ~/.matconf"
+    ssh $1 "mkdir ~/.matconf"
+    scp ~/.matconf/bashrc $1:~/.matconf/bashrc
+    scp ~/.matconf/functions $1:~/.matconf/functions
+    ssh $1 "rm -rf ~/.bashrc"
+    ssh $1 "ln -s ~/.matconf/bashrc ~/.bashrc"
+
+}
+
+function ffind() {
+    ffind -iname "*$1*"
+}
+
+function ggrep() {
+    grep -R $1 .
+}
+
+function eggrep() {
+    grep -R -E $1 .
+}
