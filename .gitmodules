@@ -1,3 +1,9 @@
 [submodule "vim"]
 	path = vim
 	url = https://mateuszaaa@bitbucket.org/mateuszaaa/vim.git
+[submodule "zsh/plugins/zsh-autosuggestions"]
+	path = zsh/plugins/zsh-autosuggestions
+	url = http://github.com/tarruda/zsh-autosuggestions
+[submodule "zsh/plugins/zsh-syntax-highlighting"]
+	path = zsh/plugins/zsh-syntax-highlighting
+	url = http://github.com/jimmijj/zsh-syntax-highlighting

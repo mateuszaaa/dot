@@ -3,7 +3,8 @@ ROOT_DIR=~/.matconf
 export PATH=$PATH:$ROOT_DIR/bin
 
 ######## OH MY ZSH ############
-export ZSH=$ROOT_DIR/oh-my-zsh
+export ZSH=$ROOT_DIR/zsh
+export ZSH_PLUGINS=$ROOT_DIR/zsh/plugins
 ZSH_THEME="own"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="mm/dd/yyyy"
@@ -12,4 +13,12 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 source $ROOT_DIR/bookmarks
 source $ROOT_DIR/functions
+#source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source $ZSH_PLUGINS/zsh-autosuggestions/autosuggestions.zsh
+
+
+#zle-line-init() {
+#    zle autosuggest-start
+#}
+#zle -N zle-line-init
 
