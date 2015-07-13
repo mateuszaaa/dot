@@ -11,14 +11,5 @@ HIST_STAMPS="mm/dd/yyyy"
 plugins=(git) 
 
 source $ZSH/oh-my-zsh.sh
-source $ROOT_DIR/bookmarks
-source $ROOT_DIR/functions
-#source $ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source $ZSH_PLUGINS/zsh-autosuggestions/autosuggestions.zsh
-
-
-#zle-line-init() {
-#    zle autosuggest-start
-#}
-#zle -N zle-line-init
-
+#source $ROOT_DIR/bookmarks
+#source $ROOT_DIR/functions
