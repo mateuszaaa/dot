@@ -11,5 +11,5 @@ HIST_STAMPS="mm/dd/yyyy"
 plugins=(git) 
 
 source $ZSH/oh-my-zsh.sh
-#source $ROOT_DIR/bookmarks
-#source $ROOT_DIR/functions
+source $ROOT_DIR/bookmarks
+source $ROOT_DIR/functions
