@@ -98,14 +98,11 @@ PathFull="\W"
 NewLine="\n"
 Jobs="\j"
 
-#git branch | head -1 | cut -d " " -f2
-
-# This PS1 snippet was adopted from code for MAC/BSD I saw from: http://allancraig.net/index.php?option=com_content&view=article&id=108:ps1-export-command-for-git&catid=45:general&Itemid=96
-# I tweaked it to work on UBUNTU 11.04 & 11.10 plus made it mo' better
-function ssh_info() {
-if [ -n "$SSH_CONNECTION" ]; then
-        echo "[SSH]"
-    fi
+function _user_host() {
+  if [[ -n $SSH_CONNECTION ]]; then
+    host=`echo -ne $HOSTNAME | cut -d '.' -f 1`
+    echo "$Yellow$host$Color_Off"
+  fi
 }
 
-export PS1=$IBlue$Time12h\ $Color_Off$Red`hostname`\ $(ssh_info)\ $Green$PathShort"\n-> "$Color_Off
+export PS1=$IBlue$Time12h"  "`_user_host`"  "$Color_Off$Green$PathShort"$Green\n-> "$Color_Off
