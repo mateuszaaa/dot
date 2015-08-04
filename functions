@@ -25,3 +25,13 @@ function ggrep() {
 function eggrep() {
     grep -R -E $1 .
 }
+
+function convert_to_swim_project() {
+    sed -i '/bm\/.*/d' $1
+    sed -i 's/^/\.\/\.\.\//g' $1
+}
+
+function convert_to_bm_project() {
+    sed -i '/swim\/.*/d' $1
+    sed -i 's/^/\.\/\.\.\//g' $1
+}

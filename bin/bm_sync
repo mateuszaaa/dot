@@ -27,15 +27,18 @@ TO=$BM_SERVER:$BM_REMOTE_ROOT
 echo $TO
 
 if [ -z "$BM_LOCAL_ROOT" ]; then
-    echo "BM_LOCAL_ROOT ENV not set"
+    echo "BM_LOCAL_ROOT not set - path to local repo"
+    exit 1
 fi
 
 if [ -z "$BM_SERVER" ]; then
-    echo "BM_SERVER ENV not set"
+    echo "BM_SERVER not set - ssh alias"
+    exit 1
 fi
 
 if [ -z "$BM_REMOTE_ROOT" ]; then
-    echo "BM_REMOTE_ROOT ENV not set"
+    echo "BM_REMOTE_ROOT not set(path to rsync on wrlin[nb])"
+    exit 1
 fi
 
 # set delete flag
