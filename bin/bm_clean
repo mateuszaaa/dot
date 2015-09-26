@@ -12,3 +12,4 @@ fi
 SRC_ROOT=${BM_REMOTE_ROOT}/BTS_SC_BM/$BM_SUBPATH
 echo "ssh $BM_SERVER make -C $SRC_ROOT clean"
 ssh $BM_SERVER make -C $SRC_ROOT clean
+ssh $BM_SERVER rm -rf $SRC_ROOT

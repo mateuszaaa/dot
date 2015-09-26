@@ -11,5 +11,5 @@ if [ -z $BM_SERVER ]; then
 fi
 
 BM_REMOTE_ROOT=${BM_REMOTE_ROOT}/BTS_SC_BM/$BM_SUBPATH
-echo "ssh $BM_SERVER compile_local=1 make -C $BM_REMOTE_ROOT $1 $2 $3 $4 $5 $6 $7"
-ssh  $BM_SERVER "compile_local=1 make -C $BM_REMOTE_ROOT $1 $2 $3 $4 $5 $6 $7" >&1
+echo "ssh $BM_SERVER compile_local=1 make -C $BM_REMOTE_ROOT $1 $2 $3 $4 $5 $6 $7 "
+ssh  $BM_SERVER "compile_local=1 make -C $BM_REMOTE_ROOT $1 $2 $3 $4 $5 $6 $7 " >&1

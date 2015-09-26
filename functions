@@ -26,6 +26,24 @@ function eggrep() {
     grep -R -E $1 .
 }
 
+function generate_bm_and_swim_projects(){
+    reload_project_for_qtcreator.sh
+    cp BTS_SC_BM.files swim/swim.files
+    cp BTS_SC_BM.includes swim/swim.includes
+    cp BTS_SC_BM.files bm/bm.files
+    cp BTS_SC_BM.includes bm/bm.includes
+
+    cd swim/
+    convert_to_swim_project swim.files
+    convert_to_swim_project swim.includes
+    cd ..
+
+    cd bm/
+    convert_to_bm_project bm.files
+    convert_to_bm_project bm.includes
+    cd ..
+}
+
 function convert_to_swim_project() {
     sed -i '/bm\/.*/d' $1
     sed -i 's/^/\.\/\.\.\//g' $1
