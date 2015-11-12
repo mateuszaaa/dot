@@ -2,7 +2,9 @@
 
 alias kkil='killall'
 alias ls='ls --color=auto'
-alias ssh='ssh -Y'
+alias ssh='ssh -Y -o UserKnownHostsFile=/dev/null'
+alias report='~/.matconf/bin/status.py'
+alias glog='git log --oneline |head -30'
 
 function copybash() {
     ssh $1 "rm -rf ~/.matconf"
