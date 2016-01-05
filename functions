@@ -6,6 +6,11 @@ alias ssh='ssh -Y -o UserKnownHostsFile=/dev/null'
 alias report='~/.matconf/bin/status.py'
 alias c='xclip -selection clipboard'
 alias glog='git log --oneline |head -30'
+alias bb-restart='ssh buildbot cd /home/lapekc6/bm_ci/tools/;git pull -r;'
+function bb_restart() {
+    ssh buildbot cd /home/lapekc6/bm_ci/tools/;git pull -r; buildbot restart /home/lapekc6/bm_ci/bm_buildbot/master/
+
+}
 
 function copybash() {
     ssh $1 "rm -rf ~/.matconf"

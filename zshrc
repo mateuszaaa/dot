@@ -1,8 +1,8 @@
-source /etc/profile
-source /etc/profile
-ROOT_DIR=~/.matconf
-export PATH=$PATH:$ROOT_DIR/bin
-
-source $ROOT_DIR/bookmarks
-source $ROOT_DIR/functions
-source $ROOT_DIR/zsh/highlight.zsh
+export PATH=$PATH:$HOME/config/bin
+source $HOME/config/profile
+source $HOME/config/bookmarks
+source $HOME/config/functions
+source $HOME/config/zsh-config
+if [ -e $HOME/.zsh-config ]; then
+    source $HOME/.zsh-config
+fi

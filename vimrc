@@ -1,3 +1,3 @@
-set runtimepath=~/.matconf/vim,$VIMRUNTIME
-source ~/.matconf/vim/vimrc
+set runtimepath=~/vim,$VIMRUNTIME
+source ~/vim/vimrc
 
