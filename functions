@@ -2,11 +2,34 @@
 
 alias kkil='killall'
 alias ls='ls --color=auto'
-alias ssh='ssh -Y -o UserKnownHostsFile=/dev/null'
 alias report='~/.matconf/bin/status.py'
 alias c='xclip -selection clipboard'
 alias glog='git log --oneline |head -30'
 alias bb-restart='ssh buildbot cd /home/lapekc6/bm_ci/tools/;git pull -r;'
+
+function ut() {
+    if [ -z $1 ]; then
+        echo "no domain provided"
+    else
+        echo "./swim/$1/$1_ut --source_dir=../swim/$1/testing/data"
+        ./swim/$1/$1_ut --source_dir=../swim/swim/$1/testing/data
+    fi
+}
+
+function vut() {
+    if [ -z $1 ]; then
+        echo "no domain provided"
+    else
+        echo "vlagrind --gen-suppressions=all --error-exitcode=1 --track-origins=yes --leak-check=full --show-leak-kinds=all ./swim/$1/$1_ut --source_dir=../swim/$1/testing/data"
+        valgrind --gen-suppressions=all --error-exitcode=1 --track-origins=yes --leak-check=full --show-leak-kinds=all ./swim/$1/$1_ut --source_dir=../swim/swim/$1/testing/data
+    fi
+}
+
+function redmi() {
+    txt=`echo $1 | sed 's/ /%s/g'`
+    adb shell input text $txt
+}
+
 function bb_restart() {
     ssh buildbot cd /home/lapekc6/bm_ci/tools/;git pull -r; buildbot restart /home/lapekc6/bm_ci/bm_buildbot/master/
 
