@@ -1,5 +1,7 @@
-#bash specyfic configuration here
-source $HOME/config/bash/git.sh
+#Reset
+Color_Off='\e[0m'       # Text Reset
+
+# Regular Colors
 export Black='\e[0;30m'        # Black
 export Red='\e[0;31m'          # Red
 export Green='\e[0;32m'        # Green
@@ -68,4 +70,3 @@ export On_IBlue='\e[0;104m'    # Blue
 export On_IPurple='\e[0;105m'  # Purple
 export On_ICyan='\e[0;106m'    # Cyan
 export On_IWhite='\e[0;107m'   # White
-PS1="\[$Purple\]\u $Green\w\[\033[m\]\$(__git_ps1)\[$White\] > "
