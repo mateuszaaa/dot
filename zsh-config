@@ -1,1 +1,2 @@
 #zsh specyfic configuration here
+export NOPRECMD=1
