@@ -37,8 +37,13 @@ function bb_restart() {
 }
 
 function sshcopyenv() {
+    if [ -z $1 ]; then
+        echo "remote param needed"
+        exit -1
+    fi
+    ssh $1 "rm -rf ~/config"
     scp -r ~/config $1:~/
-    ssh $1 "rm -rf ~/.bashrc ~/zshrc ~/.vimrc"
+    ssh $1 "rm -rf ~/.bashrc ~/.zshrc ~/.vimrc"
     ssh $1 "ln -s ~/config/zshrc ~/.zshrc"
     ssh $1 "ln -s ~/config/bashrc ~/.bashrc"
     ssh $1 "ln -s ~/config/vimrc ~/.vimrc"
