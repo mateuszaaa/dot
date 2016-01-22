@@ -6,6 +6,7 @@ alias report='~/.matconf/bin/status.py'
 alias c='xclip -selection clipboard'
 alias glog='git log --oneline |head -30'
 alias bb-restart='ssh buildbot cd /home/lapekc6/bm_ci/tools/;git pull -r;'
+alias xx='byobu new'
 
 function ut() {
     if [ -z $1 ]; then
@@ -36,51 +37,13 @@ function bb_restart() {
 }
 
 function copybash() {
-    ssh $1 "rm -rf ~/.matconf"
-    ssh $1 "mkdir ~/.matconf"
-    scp ~/.matconf/bashrc $1:~/.matconf/bashrc
-    scp ~/.matconf/functions $1:~/.matconf/functions
-    ssh $1 "rm -rf ~/.bashrc"
-    ssh $1 "ln -s ~/.matconf/bashrc ~/.bashrc"
-
+    scp ~/config $1:~/
+    ssh $1 "rm -rf ~/.bashrc ~/zshrc"
+    ssh $1 "ln -s ~/config/zshrc ~/.zshrc"
+    ssh $1 "ln -s ~/config/bashrc ~/.bashrc"
+    ssh $1 "ln -s ~/config/vimrc ~/.vimrc"
 }
 
 function ffind() {
     find -iname "*$1*"
-}
-
-function ggrep() {
-    grep -R $1 .
-}
-
-function eggrep() {
-    grep -R -E $1 .
-}
-
-function generate_bm_and_swim_projects(){
-    reload_project_for_qtcreator.sh
-    cp BTS_SC_BM.files swim/swim.files
-    cp BTS_SC_BM.includes swim/swim.includes
-    cp BTS_SC_BM.files bm/bm.files
-    cp BTS_SC_BM.includes bm/bm.includes
-
-    cd swim/
-    convert_to_swim_project swim.files
-    convert_to_swim_project swim.includes
-    cd ..
-
-    cd bm/
-    convert_to_bm_project bm.files
-    convert_to_bm_project bm.includes
-    cd ..
-}
-
-function convert_to_swim_project() {
-    sed -i '/bm\/.*/d' $1
-    sed -i 's/^/\.\/\.\.\//g' $1
-}
-
-function convert_to_bm_project() {
-    sed -i '/swim\/.*/d' $1
-    sed -i 's/^/\.\/\.\.\//g' $1
 }
