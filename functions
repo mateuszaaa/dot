@@ -22,7 +22,7 @@ function vut() {
         echo "no domain provided"
     else
         echo "vlagrind --gen-suppressions=all --error-exitcode=1 --track-origins=yes --leak-check=full --show-leak-kinds=all ./swim/$1/$1_ut --source_dir=../swim/$1/testing/data"
-        valgrind --gen-suppressions=all --error-exitcode=1 --track-origins=yes --leak-check=full --show-leak-kinds=all ./swim/$1/$1_ut --source_dir=../swim/swim/$1/testing/data
+        valgrind --gen-suppressions=all --error-exitcode=1 --track-origins=yes --leak-check=full --show-leak-kinds=all ./swim/$1/$1_ut --source_dir=../swim/swim/$1/testing/data --gtest_shuffle
     fi
 }
 
@@ -51,4 +51,46 @@ function sshcopyenv() {
 
 function ffind() {
     find -iname "*$1*"
+}
+
+function bclean() {
+    ssh $BMAKE_REMOTE_HOST rm -rf $BMAKE_REMOTE_REPO_DIR
+}
+
+function bsync() {
+    ssh $BMAKE_REMOTE_HOST mkdir -p $BMAKE_REMOTE_REPO_DIR
+    rsync -avt $BMAKE_LOCAL_REPO_DIR $BMAKE_REMOTE_HOST:$BMAKE_REMOTE_REPO_DIR
+}
+
+function bmake() {
+    BMAKE_REMOTE_REPO_DIR+="/swim/"
+    if [ -z BMAKE_PATH ]; then
+        BMAKE_REMOTE_REPO_DIR+=$BMAKE_PATH
+        echo "USING SUBPATH => $BMAKE_REMOTE_REPO_DIR"
+    fi
+    echo "ssh $BMAKE_REMOTE_HOST make -C $BMAKE_REMOTE_REPO_DIR $@"
+    ssh $BMAKE_REMOTE_HOST make -C $BMAKE_REMOTE_REPO_DIR $@
+}
+
+function bm_review_answer(){
+    commit_nr=`git log --oneline | head -1 | cut -d " " -f 1`
+    git show $commit_nr
+    echo "Fixed in $commit_nr" | c
+}
+
+function password(){
+read -s PASS
+for i in $@; do
+    index=$(( $i-1  ))
+    echo "clipboard ready: $i - ${PASS:$index:1}"
+    echo ${PASS:$index:1} | xclip -selection clipboard
+    read next
+done
+echo "exit..."
+}
+
+function hdd() {
+    sudo cryptsetup plainOpen /dev/sdb2 hdd --key-file /home/.hdd.key
+    mount /media/hdd
+    echo "/media/hdd mounted"
 }
