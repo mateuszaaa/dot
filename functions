@@ -90,7 +90,9 @@ echo "exit..."
 }
 
 function hdd() {
-    sudo cryptsetup plainOpen /dev/sdb2 hdd --key-file /home/.hdd.key
-    mount /media/hdd
-    echo "/media/hdd mounted"
+    MEDIA_HDD_STATUS=`sudo mount | grep /dev/mapper/hdd`
+    if [ -z $MEDIA_HDD_STATUS ]; then
+        sudo cryptsetup plainOpen /dev/sdb2 hdd --key-file /home/.hdd.key
+        mount /media/hdd
+    fi
 }
