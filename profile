@@ -17,3 +17,4 @@ function nokiaproxy
     git config --global https.proxy http://10.144.1.10:8080
 }
 export CCACHE_CPP2=yes
+[ -n "$XTERM_VERSION" ] && transset-df -a 0.90 >/dev/null

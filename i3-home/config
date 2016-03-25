@@ -196,7 +196,6 @@ exec --no-startup-id i3-msg 'exec xbacklight -set 100'
 exec --no-startup-id i3-msg 'exec nm-applet'
 exec --no-startup-id i3-msg 'exec sh ~/.config/i3/monitors.sh'
 exec --no-startup-id i3-msg 'exec $(sleep 1 && feh --bg-scale ~/.config/i3/wall.png)'
-exec --no-startup-id i3-msg 'workspace 1; exec xterm -e byobu;'
 exec --no-startup-id i3-msg 'workspace 2; exec firefox;'
 exec --no-startup-id i3-msg 'workspace 8; exec evolution;'
 

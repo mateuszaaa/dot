@@ -10,6 +10,7 @@ if [[ -n $HDMI2 && -n $eDP1 && -n $DP1 ]]; then
 fi
 
 if [[ -n $VGA1 && -n $eDP1 ]]; then
+    echo "2"
     sh ~/.config/i3/2_screens.sh
     exit 0
 fi

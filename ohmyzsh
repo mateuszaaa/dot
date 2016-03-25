@@ -1,0 +1,5 @@
+export ZSH=/home/matnowak/.oh-my-zsh
+ZSH_THEME="robbyrussell"
+plugins=(git)
+  export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/android-sdk/platform-tools:/opt/android-sdk/tools:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/matnowak/config/bin:/home/matnowak/config/bin:/home/matnowak/config/bin:/home/matnowak/config/bin:/home/matnowak/config/bin:/home/matnowak/config/bin:/home/matnowak/config/bin:/home/matnowak/config/bin"
+source $ZSH/oh-my-zsh.sh
