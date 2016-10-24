@@ -6,4 +6,3 @@ source $HOME/config/zsh-config
 if [ -e $HOME/.zsh-config ]; then
     source $HOME/.zsh-config
 fi
-hdd

@@ -1,0 +1,6 @@
+#!/bin/bash
+# This script connects via a SOCKS5 proxy using netcat
+
+#nc.openbsd -X 5 -x demuprx000.nsn-net.net:1081 $@
+nc -X 5 -x demuprx000.nsn-net.net:1081 $@
+#nc -X 5 -x 10.144.1.10:8080 $@

@@ -13,7 +13,8 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+#font pango:monospace 8
+font pango:System San Francisco Display 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -37,11 +38,20 @@ bindsym $mod+Shift+q kill
 #bindsym --whole-window $mod+button2 kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec "rofi -combi-modi window,run -show combi"
 bindsym $mod+i exec i3lock -c 000000
 bindsym XF86AudioRaiseVolume exec "amixer -q -D pulse sset Master 5%+ unmute"
 bindsym XF86AudioLowerVolume exec "amixer -q -D pulse sset Master 5%- unmute"
 bindsym XF86AudioMute exec "amixer -q -D pulse sset Master toggle"
+bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
+bindsym $mod+c exec "clipmenu"
+bindsym $mod+Control+Right "workspace next"
+bindsym $mod+Control+Left "workspace previous"
+bindsym $mod+b exec $HOME/config/bin/title
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+#
 #bindsym button3 floating toggle
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -76,7 +86,8 @@ bindsym $mod+Shift+Right move right
 #bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+p split h
+bindsym $mod+u split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -129,18 +140,18 @@ bindsym $mod+Shift+F11 move container to workspace 11
 bindsym $mod+Shift+F12 move container to workspace 12
 
 
-workspace 1 output HDMI2
-workspace 2 output HDMI2
-workspace 3 output HDMI2
-workspace 4 output HDMI2
-workspace 5 output DP1
-workspace 6 output DP1
-workspace 7 output DP1
-workspace 8 output DP1
-workspace 9 output eDP1
-workspace 10 output eDP1
-workspace 11 output eDP1
-workspace 12 output eDP1
+workspace 1 output HDMI2 workspace_layout stacking
+workspace 2 output HDMI2 workspace_layout stacking
+workspace 3 output HDMI2 workspace_layout stacking
+workspace 4 output HDMI2 workspace_layout stacking
+workspace 5 output DP1 workspace_layout stacking
+workspace 6 output DP1 workspace_layout stacking
+workspace 7 output DP1 workspace_layout stacking
+#workspace 8 output DP1 workspace_layout 
+workspace 9 output eDP1 workspace_layout stacking
+workspace 10 output eDP1 workspace_layout stacking
+workspace 11 output eDP1 workspace_layout stacking
+workspace 12 output eDP1 workspace_layout stacking
 
 
 # reload the configuration file
@@ -179,35 +190,85 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-  status_command i3status
-  colors {
-    separator #666666
-    background #222222
-    statusline #dddddd
-    focused_workspace #0088CC #0088CC #ffffff
-    active_workspace #333333 #333333 #ffffff
-    inactive_workspace #333333 #333333 #888888
-    urgent_workspace #2f343a #900000 #ffffff
-  }
-}
+
 for_window [window_role="pop-up"] floating enable
+#for_window [class="VirtualBox"] floating enable
 for_window [class="psi"] floating enable
-for_window [class="Gvim"] floating enable
+#for_window [class="Pidgin"] floating enable
+for_window [class="nautilus"] floating enable
+for_window [class="thunar"] floating enable
+
+assign [class="Firefox"] workspace 5
+assign [class="Evolution"] workspace 8
+assign [class="Pidgin"] workspace 8
+assign [class="spotify"] workspace 12
 
 exec --no-startup-id i3-msg 'exec xset b off'
 exec --no-startup-id i3-msg 'exec xbacklight -set 100'
 exec --no-startup-id i3-msg 'exec nm-applet'
+exec --no-startup-id i3-msg 'exec clipmenud'
 exec --no-startup-id i3-msg 'exec sh ~/.config/i3/monitors.sh'
-exec --no-startup-id i3-msg 'exec $(sleep 1 && feh --bg-scale ~/.config/i3/wall.png)'
+exec --no-startup-id i3-msg 'exec $(sleep 1 && feh --bg-scale ~/.config/i3/material.jpg)'
 exec --no-startup-id i3-msg 'exec $(sleep 1 && xcompmgr)'
-exec --no-startup-id i3-msg 'workspace 1; exec xterm -e byobu;'
-exec --no-startup-id i3-msg 'workspace 5; exec firefox;'
-exec --no-startup-id i3-msg 'workspace 10; exec evolution;'
+
+
+exec --no-startup-id i3-msg 'exec firefox'
+exec --no-startup-id i3-msg 'exec evolution'
+exec --no-startup-id i3-msg 'exec xcompmgr'
+exec --no-startup-id i3-msg 'exec setxkbmap -layout pl'
+exec --no-startup-id i3-msg 'exec (sleep 2 && pidgin)'
+exec --no-startup-id i3-msg 'exec cd ~/decisco/ && python2 decisco.py --use-syslog --override-xmpp=isj7cmx.webexconnect.com -c credentials'
+# exec --no-startup-id i3-msg 'workspace 1; exec  xterm -e byobu'
+#exec --no-startup-id i3-msg 'workspace 1; exec  xterm'
+#exec --no-startup-id i3-msg 'workspace 5; exec  firefox'
+#exec --no-startup-id i3-msg 'workspace 9; exec  psi'
+#exec --no-startup-id i3-msg 'workspace 10; exec  evolution'
+#exec --no-startup-id i3-msg 'workspace 12; exec  spotify'
+
+gaps inner 20
+gaps outer 20
+for_window [class=".*"] border pixel 0
+#for_window [class=".*Pidgin.*"] border pixel 1
+for_window [class=".*"] border pixel 2
+hide_edge_borders yes
+#for_window [class=".*evolution*"] border pixel 0
 
 #autostart
+#
+set $FOCUS_BORDER "#3b1261"
+set $FOCUS_BACKGROUND "#2B1B8D"
+set $FOCUS_TEXT "#ffffff"
+set $FOCUS_INDICATOR "#f0fff0"
 
-client.focused #0088CC #0088CC #ffffff #dddddd
-client.focused_inactive #333333 #333333 #888888 #292d2e
-client.unfocused #333333 #333333 #888888 #292d2e
-client.urgent #2f343a #900000 #ffffff #900000
+set $UNFOCUS_BORDER "#2F343F"
+set $UNFOCUS_BACKGROUND "#2F343F"
+set $UNFOCUS_TEXT "#888888"
+set $UNFOCUS_INDICATOR "#292d2e"
+#
+set $URGENT_BORDER "#ff0000"
+set $URGENT_BACKGROUND "#ff0000"
+set $URGENT_TEXT "#ffffff"
+set $URGENT_INDICATOR "#000000"
+
+set $PANEL_BACKGROUND "#000000"
+set $PANEL_ACTIVE_TEXT "#ffffff"
+set $PANEL_INACTIVE_TEXT "#888888"
+
+bar {
+  status_command i3blocks
+  font pango:System San Francisco Display 10
+  colors {
+    separator #666666
+    background #000000
+    statusline #ffffff
+    focused_workspace $FOCUS_BORDER $FOCUS_BACKGROUND $PANEL_ACTIVE_TEXT
+    active_workspace $FOCUS_BORDER $FOCUS_BACKGROUND $PANEL_ACTIVE_TEXT
+    inactive_workspace $PANEL_BACKGROUND $PANEL_BACKGROUND $PANEL_INACTIVE_TEXT
+    urgent_workspace $URGENT_BORDER $URGENT_BACKGROUND $URGENT_TEXT
+  }
+}
+
+client.focused $FOCUS_BORDER $FOCUS_BACKGROUND $FOCUS_TEXT $FOCUS_INDICATOR
+client.focused_inactive $UNFOCUS_BORDER $UNFOCUS_BACKGROUND $UNFOCUS_TEXT $UNFOCUS_INDICATOR
+client.unfocused $UNFOCUS_BORDER $UNFOCUS_BACKGROUND $UNFOCUS_TEXT $UNFOCUS_INDICATOR
+client.urgent $URGENT_BORDER $URGENT_BACKGROUND $URGENT_TEXT $URGENT_INDICATOR

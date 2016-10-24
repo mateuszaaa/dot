@@ -10,7 +10,7 @@ set wrapscan
 " show pressed keys in lower right corner
 set showcmd
 " tab -> spaces
-set expandtab
+"set expandtab
 set tabstop=4
 set shiftwidth=4
 " keep a 5 line buffer for the cursor from top/bottom of window
@@ -41,6 +41,5 @@ vnoremap <C-S-K> :m-2<CR>gv=gv
 " backspace support 
 "inoremap <BS> <LEFT><DELETE>
 set smartindent
-set autoident
 set autoident
 set backspace

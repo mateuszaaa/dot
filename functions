@@ -3,7 +3,7 @@
 alias kkil='killall'
 alias ls='ls --color=auto'
 alias report='~/.matconf/bin/status.py'
-alias c='xclip -selection clipboard'
+alias c='xclip -selection primary'
 alias glog='git log --oneline |head -30'
 alias bb-restart='ssh buildbot cd /home/lapekc6/bm_ci/tools/;git pull -r;'
 alias xx='byobu new'
@@ -28,7 +28,7 @@ function vut() {
 
 function redmi() {
     txt=`echo $1 | sed 's/ /%s/g'`
-    adb shell input text $txt
+    adb shell input keyboard text $txt
 }
 
 function bb_restart() {
@@ -89,10 +89,130 @@ done
 echo "exit..."
 }
 
-function hdd() {
-    MEDIA_HDD_STATUS=`sudo mount | grep /dev/mapper/hdd`
-    if [ -z $MEDIA_HDD_STATUS ]; then
-        sudo cryptsetup plainOpen /dev/sdb2 hdd --key-file /home/.hdd.key
-        mount /media/hdd
+function cscope-indexing {
+    find . -iname "*.c" -or -iname "*.h" -or -iname "*.hpp" -or -iname "*.cpp" > cscope.files
+    cscope -b -q -k
+}
+
+function ctags-index-c {
+ ctags -R  --languages=C,C++ .
+}
+
+function ctags-index-ttcn {
+ ctags -R  --languages=TTCN .
+}
+
+function cclass {
+    echo -n "class name: "
+    read class
+    if [ -e "${class}.cpp" ]; then
+        echo "file exists (${class}.cpp)"
+        exit 1
     fi
+
+    if [ -e "${class}.h" ]; then
+        echo "file exists (${class}.cpp)"
+        exit 1
+    fi
+    #touch ${class}.cpp ${class}.h
+    define_name=`echo ${class}_h|tr '[:lower:]' '[:upper:]'`
+    echo "#ifndef ${define_name}" >> ${class}.h
+    echo "#define ${define_name}" >> ${class}.h
+    echo "" >> ${class}.h
+    echo "class ${class}{" >> ${class}.h
+    echo "public:" >> ${class}.h
+    echo "\t${class}();" >> ${class}.h
+    echo "\t~${class}();" >> ${class}.h
+    echo "private:" >> ${class}.h
+    echo "};" >> ${class}.h
+    echo "" >> ${class}.h
+    echo "#endif //${define_name}" >> ${class}.h
+
+    echo "#include \"${class}.h\"" >> ${class}.cpp
+    echo "" >> ${class}.cpp 
+    echo "${class}::${class}()" >> ${class}.cpp 
+    echo "{}" >> ${class}.cpp 
+    echo "" >> ${class}.cpp 
+    echo "${class}::~${class}(){" >> ${class}.cpp 
+    echo "{}" >> ${class}.cpp 
+
+}
+
+function ctest {
+    echo -n "class name: "
+    read class
+    test_class="${class}_ut"
+    test_name="${class}_test"
+
+    if [ -e "${test_class}.cpp" ]; then
+        echo "file exists (${class}.cpp)"
+        exit 1
+    fi
+    touch ${test_class}.cpp
+    echo "#include <gtest/gtest.h>" >> ${test_class}.cpp
+    echo "#include \"${class}.h\"" >> ${test_class}.cpp
+    echo "" >> ${test_class}.cpp 
+    echo "using ::testing::Return;" >> ${test_class}.cpp 
+    echo "using ::testing::_;" >> ${test_class}.cpp 
+
+    echo "class ${test_name}: public ::testing::Test{" >> ${test_class}.cpp
+    echo "public:" >> ${test_class}.cpp
+    echo "\t virtual void SetUp(){" >> ${test_class}.cpp
+    echo "" >> ${test_class}.cpp
+    echo "\t}" >> ${test_class}.cpp
+    echo "};" >> ${test_class}.cpp
+    echo "" >> ${test_class}.cpp
+    echo "TEST_F(${test_name}, nok_test){" >> ${test_class}.cpp
+    echo "\tEXPECT_TRUE(false);" >> ${test_class}.cpp
+    echo "}" >> ${test_class}.cpp
+
+}
+
+function tbd {
+    file=$1
+    archive_type=$2
+    unit=$3
+
+    if [ -z $archive_type ];  then
+        echo "type not set - using apps"
+        archive_type="apps"
+    fi
+
+    if [ -z $unit ]; then
+        echo "unit value not set - using FCT"
+        unit="FCT"
+    fi
+    lower_unit=`echo $unit | tr '[A-Z]' '[a-z]'`
+    upper_unit=`echo $unit | tr '[a-z]' '[A-Z]'`
+    file_name=`basename $1`
+    checksum=`adler $file`
+    length=`ls -la $file | cut -d " " -f 5`
+    name=`echo $file_name | cut -d "_" -f 1`
+    post_split=`echo $file_name | cut -d "_" -f 2`
+    version="_$post_split"
+    if [ -z $version ]; then
+        name=`echo $file_name | cut -d "." -f 1`
+        post_split=`echo $file_name | cut -d "." -f 2`
+        version=".$post_split"
+    fi
+    if [ -z $version ]; then
+        echo "cannot parse version"
+        return
+    fi
+    echo "<buildElement swFileKeyName=\"\" name=\"$name\" version=\"$version\" hwUnit=\"$upper_unit\" nrOfBlocks=\"1\" checksum=\"$checksum\" fileLength=\"$length\" targetPath=\"/rom/$archive_type/$lower_unit/\" path=\"/$unit/\" compressed=\"\" encrypted=\"\"/>"
+}
+
+function rotta {
+	umout ~/rotta/
+	sudo mkdir -p ~/rotta/ && sudo mount -t cifs //nsn-intra.net/eefs/rotta ~/rotta/ -o username=matnowak,file_mode=0777,nosuid,uid=matnowak,gid=matnowak,sec=ntlm
+}
+
+function share {
+	chmod -R g+rwx $1
+	chown -R :users $1
+}
+
+function title {
+    printf "\e]0;$@\7\n"
+
 }

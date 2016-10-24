@@ -1,0 +1,8 @@
+$full_text = "$percent%";
+
+if ($status eq 'Discharging') {
+        $full_text .= ' DIS';
+} elsif ($status eq 'Charging') {
+        $full_text .= ' CHR';
+}
+
