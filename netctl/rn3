@@ -1,0 +1,9 @@
+Description='A simple WPA encrypted wireless connection'
+Interface=wlo1
+Connection=wireless
+Security=wpa
+IP=dhcp
+ESSID='RN3'
+Key='5184f5e9eb77'
+# Set a priority for automatic profile selection
+#Priority=10

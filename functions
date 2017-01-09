@@ -216,3 +216,15 @@ function title {
     printf "\e]0;$@\7\n"
 
 }
+
+function vimreview {
+    gvim -p `git diff --name-only HEAD` -c "tabdo Gdiff"
+}
+
+function vimcompare {
+    if [ -z $1 ]; then
+        echo "missing arg - branch name"
+        return 1
+    fi
+    gvim -p `git diff --name-only $1` -c "tabdo Gdiff $1"
+}
