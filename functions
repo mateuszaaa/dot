@@ -232,3 +232,5 @@ function vimcompare {
 function vpn {
     sudo openconnect --user matnowak --no-proxy --certificate /home/cert/matnowak.ipa.nsn-net.net.crt --cafile /home/cert/ca_bundle.crt --sslkey /home/cert/matnowak.ipa.nsn-net.net.key nra-emea-fi-esp-vip.net.nokia.com
 }
+
+alias clang='clang -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'

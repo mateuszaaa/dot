@@ -20,4 +20,4 @@ function nokiaproxy
 }
 export CCACHE_CPP2=yes
 
-[ -n "$XTERM_VERSION" ] && transset-df -a 0.90 >/dev/null
+#[ -n "$XTERM_VERSION" ] && transset-df -a 0.90 >/dev/null
