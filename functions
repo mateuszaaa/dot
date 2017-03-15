@@ -203,8 +203,15 @@ function tbd {
 }
 
 function rotta {
-	umout ~/rotta/
+    mkdir -p ~/rotta/
+	umount ~/rotta/
 	sudo mkdir -p ~/rotta/ && sudo mount -t cifs //nsn-intra.net/eefs/rotta ~/rotta/ -o username=matnowak,file_mode=0777,nosuid,uid=matnowak,gid=matnowak,sec=ntlm
+}
+
+function windows {
+    mkdir -p ~/citrix/
+	umount ~/citrix/
+	sudo mkdir -p ~/citrix/ && sudo mount -t cifs //mueefsn51.emea.nsn-net.net ~/citrix/ -o username=matnowak,file_mode=0777,nosuid,uid=matnowak,gid=matnowak,sec=ntlm
 }
 
 function share {
@@ -233,4 +240,9 @@ function vpn {
     sudo openconnect --user matnowak --no-proxy --certificate /home/cert/matnowak.ipa.nsn-net.net.crt --cafile /home/cert/ca_bundle.crt --sslkey /home/cert/matnowak.ipa.nsn-net.net.key nra-emea-fi-esp-vip.net.nokia.com
 }
 
-alias clang='clang -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
+alias cmake='cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
+alias rcp='mount /build/rcp'
+
+function addsubbtitlesMKV {
+    ffmpeg -i *.mkv -sub_charenc UTF8 -i *.srt -map 0:v -map 0:a -c copy -map 1 -c:s:0 srt -metadata:s:s:0 language=pl output.mkv
+}

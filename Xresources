@@ -51,3 +51,5 @@ rofi.opacity:                        95
 rofi.width:                          50
 rofi.font:                           Inconsolata 24
 
+xterm*metaSendsEscape: true
+xterm*eightBitInput: false

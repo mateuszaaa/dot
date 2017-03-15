@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ ! "$#" == 0 ]
+then 
+hash="`echo $1`.."
+fi
+
+author=`git config user.name`
+since=`date '+%Y-%m-01T00:00'`
+branch_name=`git symbolic-ref --short HEAD`
+dir_name=$(basename $(pwd))
+
+vim opis.txt
+git log $hash -p --author="$author" --since="$since" >> diff.diff
+zip ${dir_name}-${branch_name}.zip `git log $hash -p --name-only --author="$author" --since="$since" --pretty="format:" | sort | uniq` opis.txt diff.diff
+rm opis.txt diff.diff

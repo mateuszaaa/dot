@@ -41,19 +41,15 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec "rofi -combi-modi window,run -show combi"
 bindsym $mod+i exec i3lock -c 000000
-bindsym XF86AudioRaiseVolume exec "amixer -q -D pulse sset Master 5%+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer -q -D pulse sset Master 5%- unmute"
-bindsym XF86AudioMute exec "amixer -q -D pulse sset Master toggle"
+bindsym XF86AudioRaiseVolume exec "amixer set 'Master' 10%+ unmute"
+bindsym XF86AudioLowerVolume exec "amixer set 'Master' 10%- unmute"
+bindsym XF86AudioMute exec "amixer set 'Master' toggle"
 bindsym XF86Sleep exec "systemctl -i suspend"
 bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
 bindsym $mod+c exec "clipmenu"
-bindsym $mod+Control+Right "workspace next"
-bindsym $mod+Control+Left "workspace previous"
 bindsym $mod+b exec $HOME/config/bin/title
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-bindsym $mod+m exec "transset-df -a --dec 0.1"
-bindsym $mod+n exec "transset-df -a --inc 0.1"
 #
 #bindsym button3 floating toggle
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -128,6 +124,10 @@ bindsym $mod+F10 workspace 10
 bindsym $mod+F11 workspace 11
 bindsym $mod+F12 workspace 12
 
+bindsym $mod+1 workspace web
+bindsym $mod+2 workspace mail
+bindsym $mod+3 workspace communicator
+
 # move focused container to workspace
 bindsym $mod+Shift+F1 move container to workspace 1
 bindsym $mod+Shift+F2 move container to workspace 2
@@ -147,10 +147,14 @@ workspace 1 output DP1 workspace_layout stacking
 workspace 2 output DP1 workspace_layout stacking
 workspace 3 output DP1 workspace_layout stacking
 workspace 4 output DP1 workspace_layout stacking
+workspace citrix output DP1 workspace_layout stacking
+workspace web output HDMI2 workspace_layout default
 workspace 5 output HDMI2 workspace_layout stacking
 workspace 6 output HDMI2 workspace_layout stacking
 workspace 7 output HDMI2 workspace_layout stacking
 workspace 8 output HDMI2
+workspace mail output eDP1 workspace_layout default
+workspace communicator output eDP1 workspace_layout default
 workspace 9 output eDP1 workspace_layout stacking
 workspace 10 output eDP1 workspace_layout stacking
 workspace 11 output eDP1 workspace_layout stacking
@@ -197,20 +201,21 @@ bindsym $mod+r mode "resize"
 for_window [window_role="pop-up"] floating enable
 #for_window [class="VirtualBox"] floating enable
 for_window [class="psi"] floating enable
-for_window [class="psi"] floating enable
+for_window [class="Xephyr"] floating disable
 #for_window [class="Pidgin"] floating enable
 for_window [class="nautilus"] floating enable
 for_window [class="thunar"] floating enable
 
-#assign [class="Firefox"] workspace 5
-assign [class="Evolution"] workspace 8
-assign [class="Pidgin"] workspace 8
+assign [class="Chromium"] workspace web
+assign [class="Evolution"] workspace mail
+assign [class="Pidgin"] workspace communicator
 assign [class="spotify"] workspace 12
+assign [class="Xephyr"] workspace citrix
 
 exec --no-startup-id i3-msg 'exec xset b off'
+exec --no-startup-id i3-msg 'exec parcellite'
 exec --no-startup-id i3-msg 'exec xbacklight -set 100'
 exec --no-startup-id i3-msg 'exec nm-applet'
-exec --no-startup-id i3-msg 'exec clipmenud'
 exec --no-startup-id i3-msg 'exec sh ~/.config/i3/monitors.sh'
 exec --no-startup-id i3-msg 'exec $(sleep 1 && feh --bg-scale ~/.config/i3/material.jpg)'
 exec --no-startup-id i3-msg 'exec $(sleep 1 && xcompmgr)'
@@ -230,8 +235,8 @@ exec --no-startup-id i3-msg 'workspace 8; append_layout ~/.config/i3/workspace-8
 #exec --no-startup-id i3-msg 'workspace 10; exec  evolution'
 #exec --no-startup-id i3-msg 'workspace 12; exec  spotify'
 
-gaps inner 20
-gaps outer 20
+#gaps inner 20
+#gaps outer 20
 for_window [class=".*"] border pixel 0
 #for_window [class=".*Pidgin.*"] border pixel 1
 for_window [class=".*"] border pixel 2

@@ -1,0 +1,7 @@
+#!/bin/bash
+Xephyr -ac -br -noreset -screen 1900x1200 :1.0 &
+#Xephyr -ac -br -noreset :1.0 &
+ZEPHYR_PID=$!
+sleep 1
+DISPLAY=:1.0 /opt/Citrix/ICAClient/wfica.sh $1
+kill $ZEPHYR_PID
