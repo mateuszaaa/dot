@@ -5,7 +5,8 @@ then
 hash="`echo $1`.."
 fi
 
-author=`git config user.name`
+#author=`git config user.name`
+author=nowakowski
 since=`date '+%Y-%m-01T00:00'`
 branch_name=`git symbolic-ref --short HEAD`
 dir_name=$(basename $(pwd))

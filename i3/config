@@ -48,6 +48,8 @@ bindsym XF86Sleep exec "systemctl -i suspend"
 bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
 bindsym $mod+c exec "clipmenu"
 bindsym $mod+b exec $HOME/config/bin/title
+#bindsym $mod+shift+p exec "echo 'tA#fmKYix5My' | xclip -selection primary"
+bindsym $mod+shift+p exec "echo 'dn!YIVJG9A0#' | xclip -selection primary"
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 #
@@ -217,7 +219,7 @@ exec --no-startup-id i3-msg 'exec parcellite'
 exec --no-startup-id i3-msg 'exec xbacklight -set 100'
 exec --no-startup-id i3-msg 'exec nm-applet'
 exec --no-startup-id i3-msg 'exec sh ~/.config/i3/monitors.sh'
-exec --no-startup-id i3-msg 'exec $(sleep 1 && feh --bg-scale ~/.config/i3/material.jpg)'
+exec --no-startup-id i3-msg 'exec $(sleep 1 && feh --bg-scale ~/.config/i3/wall.jpg)'
 exec --no-startup-id i3-msg 'exec $(sleep 1 && xcompmgr)'
 
 

@@ -102,71 +102,6 @@ function ctags-index-ttcn {
  ctags -R  --languages=TTCN .
 }
 
-function cclass {
-    echo -n "class name: "
-    read class
-    if [ -e "${class}.cpp" ]; then
-        echo "file exists (${class}.cpp)"
-        exit 1
-    fi
-
-    if [ -e "${class}.h" ]; then
-        echo "file exists (${class}.cpp)"
-        exit 1
-    fi
-    #touch ${class}.cpp ${class}.h
-    define_name=`echo ${class}_h|tr '[:lower:]' '[:upper:]'`
-    echo "#ifndef ${define_name}" >> ${class}.h
-    echo "#define ${define_name}" >> ${class}.h
-    echo "" >> ${class}.h
-    echo "class ${class}{" >> ${class}.h
-    echo "public:" >> ${class}.h
-    echo "\t${class}();" >> ${class}.h
-    echo "\t~${class}();" >> ${class}.h
-    echo "private:" >> ${class}.h
-    echo "};" >> ${class}.h
-    echo "" >> ${class}.h
-    echo "#endif //${define_name}" >> ${class}.h
-
-    echo "#include \"${class}.h\"" >> ${class}.cpp
-    echo "" >> ${class}.cpp 
-    echo "${class}::${class}()" >> ${class}.cpp 
-    echo "{}" >> ${class}.cpp 
-    echo "" >> ${class}.cpp 
-    echo "${class}::~${class}(){" >> ${class}.cpp 
-    echo "{}" >> ${class}.cpp 
-
-}
-
-function ctest {
-    echo -n "class name: "
-    read class
-    test_class="${class}_ut"
-    test_name="${class}_test"
-
-    if [ -e "${test_class}.cpp" ]; then
-        echo "file exists (${class}.cpp)"
-        exit 1
-    fi
-    touch ${test_class}.cpp
-    echo "#include <gtest/gtest.h>" >> ${test_class}.cpp
-    echo "#include \"${class}.h\"" >> ${test_class}.cpp
-    echo "" >> ${test_class}.cpp 
-    echo "using ::testing::Return;" >> ${test_class}.cpp 
-    echo "using ::testing::_;" >> ${test_class}.cpp 
-
-    echo "class ${test_name}: public ::testing::Test{" >> ${test_class}.cpp
-    echo "public:" >> ${test_class}.cpp
-    echo "\t virtual void SetUp(){" >> ${test_class}.cpp
-    echo "" >> ${test_class}.cpp
-    echo "\t}" >> ${test_class}.cpp
-    echo "};" >> ${test_class}.cpp
-    echo "" >> ${test_class}.cpp
-    echo "TEST_F(${test_name}, nok_test){" >> ${test_class}.cpp
-    echo "\tEXPECT_TRUE(false);" >> ${test_class}.cpp
-    echo "}" >> ${test_class}.cpp
-
-}
 
 function tbd {
     file=$1
@@ -240,9 +175,53 @@ function vpn {
     sudo openconnect --user matnowak --no-proxy --certificate /home/cert/matnowak.ipa.nsn-net.net.crt --cafile /home/cert/ca_bundle.crt --sslkey /home/cert/matnowak.ipa.nsn-net.net.key nra-emea-fi-esp-vip.net.nokia.com
 }
 
-alias cmake='cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
+# alias cmake='cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON'
 alias rcp='mount /build/rcp'
 
+function addsubbtitlesMP4 {
+    $(readlink -f $1)
+    movie_path=$(echo $(readlink -f $1) | sed s/\.mp4$//g | sed s/\.MP4$//g)
+    movie=$movie_path.mp4
+    subs=$movie_path.srt
+    output=${movie_path}_WITH_SUBS.mp4
+    if [ ! -e $movie ]; then
+        echo "$movie - no such file exists"
+        exit 1
+    fi
+    if [ ! -e $subs ]; then
+        echo "$subs - no such file exists"
+        exit 1
+    fi
+
+    ffmpeg -i $movie -sub_charenc CP1250 -i $subs -vcodec copy -acodec copy -scodec mov_text -metadata:s:s:0 language=pl $output
+}
+
 function addsubbtitlesMKV {
-    ffmpeg -i *.mkv -sub_charenc UTF8 -i *.srt -map 0:v -map 0:a -c copy -map 1 -c:s:0 srt -metadata:s:s:0 language=pl output.mkv
+    $(readlink -f $1)
+    movie_path=$(echo $(readlink -f $1) | sed s/\.mp4$//g | sed s/\.MP4$//g)
+    movie=$movie_path.mkv
+    subs=$movie_path.srt
+    output=${movie_path}_WITH_SUBS.mkv
+    if [ ! -e $movie ]; then
+        echo "$movie - no such file exists"
+        return 1
+    fi
+    if [ ! -e $subs ]; then
+        echo "$subs - no such file exists"
+        return 1
+    fi
+
+    ffmpeg -i $movie -i $subs -vcodec copy -acodec copy -scodec srt $output
+}
+
+function hex(){
+    python -c "print(hex($1))"
+}
+
+function bin(){
+    python -c "print(bin($1))"
+}
+
+function copynokiapassword(){
+    echo -e "dn!YIVJG9A0#" | xclip -selection primary
 }
