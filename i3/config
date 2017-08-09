@@ -40,6 +40,7 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec "rofi -combi-modi window,run -show combi"
+bindsym $mod+m exec "/home/user/rofi-pass/rofi-pass"
 bindsym $mod+i exec i3lock -c 000000
 bindsym XF86AudioRaiseVolume exec "amixer set 'Master' 10%+ unmute"
 bindsym XF86AudioLowerVolume exec "amixer set 'Master' 10%- unmute"
