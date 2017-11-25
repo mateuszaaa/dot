@@ -48,8 +48,8 @@ bindsym XF86AudioMute exec "amixer set 'Master' toggle"
 bindsym XF86Sleep exec "systemctl -i suspend"
 bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
 bindsym $mod+c exec "clipmenu"
-bindsym $mod+b exec $HOME/config/bin/title
-#bindsym $mod+shift+p exec "echo 'tA#fmKYix5My' | xclip -selection primary"
+bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
+bindsym $mod+b exec i3-input -F 'move window to workspace "%s"' -P 'Workspace name:'
 bindsym $mod+shift+p exec "echo 'dn!YIVJG9A0#' | xclip -selection primary"
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
@@ -213,6 +213,7 @@ assign [class="Chromium"] workspace web
 assign [class="Evolution"] workspace mail
 assign [class="spotify"] workspace 12
 assign [class="Xephyr"] workspace citrix
+assign [class="rviz"] workspace rviz
 
 exec --no-startup-id i3-msg 'exec xset b off'
 exec --no-startup-id i3-msg 'exec parcellite'
