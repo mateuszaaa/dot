@@ -39,12 +39,12 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec "rofi -combi-modi window,run -show combi -modi combi"
-bindsym $mod+m exec "/home/user/rofi-pass/rofi-pass"
+bindsym $mod+d exec "rofi -combi-modi window,run -show combi"
+bindsym $mod+m exec "~/config/bin/rofi-pass"
 bindsym $mod+i exec i3lock -c 000000
 bindsym XF86AudioRaiseVolume exec "amixer set 'Master' 10%+ unmute"
 bindsym XF86AudioLowerVolume exec "amixer set 'Master' 10%- unmute"
-bindsym XF86AudioMute exec "amixer set 'Master' toggle"
+bindsym XF86AudioMute exec "amixer set 'Capture' toggle"
 bindsym XF86Sleep exec "systemctl -i suspend"
 bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
 bindsym $mod+c exec "clipmenu"
@@ -170,7 +170,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+Delete exec "killall i3"
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -225,12 +225,8 @@ exec --no-startup-id i3-msg 'exec $(sleep 1 && xcompmgr)'
 
 
 #exec --no-startup-id i3-msg 'exec firefox'
-exec --no-startup-id i3-msg 'exec evolution'
 exec --no-startup-id i3-msg 'exec xcompmgr'
 exec --no-startup-id i3-msg 'exec setxkbmap -layout pl'
-exec --no-startup-id i3-msg 'exec (sleep 2 && pidgin)'
-exec --no-startup-id i3-msg 'exec cd ~/decisco/ && python2 decisco.py --use-syslog --override-xmpp=isj7cmx.webexconnect.com -c credentials'
-exec --no-startup-id i3-msg 'workspace 8; append_layout ~/.config/i3/workspace-8.json'
 # exec --no-startup-id i3-msg 'workspace 1; exec  xterm -e byobu'
 #exec --no-startup-id i3-msg 'workspace 1; exec  xterm'
 #exec --no-startup-id i3-msg 'workspace 5; exec  firefox'
