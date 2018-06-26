@@ -1,3 +1,3 @@
-set runtimepath=~/vim,$VIMRUNTIME
+set runtimepath=~/vim,$VIMRUNTIME,/usr/local/share/vim/vim80
 source ~/vim/vimrc
 

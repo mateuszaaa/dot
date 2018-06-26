@@ -1,0 +1,16 @@
+#!/bin/bash
+REPO_ROOT="$(dirname $(readlink -f $0))/../.."
+FORMATER_BINARY=~/config/bin/git-clang-format
+
+export Green='\e[0;32m'        # Green
+export White='\e[0;37m'        # White
+
+
+against=HEAD
+FILES=$(git diff --cached --name-only | grep -v .proto | grep -v .txt | xargs)
+echo -e "${Green}Running code formatting ..."
+$FORMATER_BINARY --style="file" $FILES
+echo -ne "$White"
+
+git add $FILES
+
