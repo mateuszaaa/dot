@@ -327,7 +327,7 @@ Run ${default_do} with <span color='$help_color'>Enter</span>. For more help hit
   then
     if [[ -n $default_user ]]
     then
-      stuff["${USERNAME_field}"]="${default_user}"
+      stuff["${USERNAME_field}"]="mateusz.cz.nowakowski@gmail.com"
     fi
   fi
   pass_content="$(for key in "${!stuff[@]}"; do printf '%s\n' "${key}: ${stuff[$key]}"; done)"

@@ -49,7 +49,7 @@ bindsym XF86Sleep exec "systemctl -i suspend"
 bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
 bindsym $mod+c exec "clipmenu"
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
-bindsym $mod+b exec i3-input -F 'move window to workspace "%s"' -P 'Workspace name:'
+bindsym $mod+b exec rofi-bluetooth
 bindsym $mod+shift+p exec "echo 'dn!YIVJG9A0#' | xclip -selection primary"
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
@@ -114,36 +114,32 @@ bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
 # switch to workspace
-bindsym $mod+F1 workspace 1
-bindsym $mod+F2 workspace 2
-bindsym $mod+F3 workspace 3
-bindsym $mod+F4 workspace 4
-bindsym $mod+F5 workspace 5
-bindsym $mod+F6 workspace 6
-bindsym $mod+F7 workspace 7
-bindsym $mod+F8 workspace 8
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
 bindsym $mod+F9 workspace 9
-bindsym $mod+F10 workspace 10
-bindsym $mod+F11 workspace 11
-bindsym $mod+F12 workspace 12
-
-bindsym $mod+1 workspace web
-bindsym $mod+2 workspace mail
-bindsym $mod+3 workspace communicator
+bindsym $mod+10 workspace 10
+bindsym $mod+11 workspace 11
+bindsym $mod+12 workspace 12
 
 # move focused container to workspace
-bindsym $mod+Shift+F1 move container to workspace 1
-bindsym $mod+Shift+F2 move container to workspace 2
-bindsym $mod+Shift+F3 move container to workspace 3
-bindsym $mod+Shift+F4 move container to workspace 4
-bindsym $mod+Shift+F5 move container to workspace 5
-bindsym $mod+Shift+F6 move container to workspace 6
-bindsym $mod+Shift+F7 move container to workspace 7
-bindsym $mod+Shift+F8 move container to workspace 8
-bindsym $mod+Shift+F9 move container to workspace 9
-bindsym $mod+Shift+F10 move container to workspace 10
-bindsym $mod+Shift+F11 move container to workspace 11
-bindsym $mod+Shift+F12 move container to workspace 12
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+10 move container to workspace 10
+bindsym $mod+Shift+11 move container to workspace 11
+bindsym $mod+Shift+12 move container to workspace 12
 
 
 #workspace 1 output DP1 workspace_layout default
@@ -204,6 +200,7 @@ bindsym $mod+r mode "resize"
 for_window [window_role="pop-up"] floating enable
 
 exec --no-startup-id i3-msg 'exec nm-applet'
+exec --no-startup-id i3-msg 'exec pasystray'
 exec --no-startup-id i3-msg 'exec setxkbmap -layout pl'
 
 for_window [class=".*"] border pixel 0
@@ -232,7 +229,7 @@ set $PANEL_ACTIVE_TEXT "#ffffff"
 set $PANEL_INACTIVE_TEXT "#888888"
 
 bar {
-  status_command i3blocks
+  status_command i3blocks -c ~/.config/i3/i3blocks.conf
   font pango:System San Francisco Display 10
   colors {
     separator #666666
