@@ -31,15 +31,20 @@ font pango:System San Francisco Display 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
+for_window [class=".*"] border pixel 0 
 
 # kill focused window
 bindsym $mod+Shift+q kill
-#bindsym --whole-window $mod+button2 kill
+# smart_gaps on
+# smart_borders on
+gaps inner 10
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec "rofi -combi-modi window,run -show combi"
+bindsym $mod+x exec "scrot -s /tmp/shot.png"
+bindsym $mod+c exec "spectacle -b -r -c"
 bindsym $mod+m exec "~/config/bin/rofi-pass"
 bindsym $mod+i exec i3lock -c 000000
 bindsym XF86AudioRaiseVolume exec "amixer set 'Master' 10%+ unmute"
@@ -47,7 +52,6 @@ bindsym XF86AudioLowerVolume exec "amixer set 'Master' 10%- unmute"
 bindsym XF86AudioMute exec "amixer set 'Capture' toggle"
 bindsym XF86Sleep exec "systemctl -i suspend"
 bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
-bindsym $mod+c exec "clipmenu"
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
 bindsym $mod+b exec rofi-bluetooth
 bindsym $mod+shift+p exec "echo 'dn!YIVJG9A0#' | xclip -selection primary"
@@ -122,10 +126,7 @@ bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
-bindsym $mod+F9 workspace 9
-bindsym $mod+10 workspace 10
-bindsym $mod+11 workspace 11
-bindsym $mod+12 workspace 12
+bindsym $mod+9 workspace 9
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -137,9 +138,6 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+10 move container to workspace 10
-bindsym $mod+Shift+11 move container to workspace 11
-bindsym $mod+Shift+12 move container to workspace 12
 
 
 #workspace 1 output DP1 workspace_layout default
@@ -199,13 +197,21 @@ bindsym $mod+r mode "resize"
 
 for_window [window_role="pop-up"] floating enable
 
+exec --no-startup-id i3-msg 'exec blueman-applet'
+exec --no-startup-id i3-msg 'exec autorandr --change'
 exec --no-startup-id i3-msg 'exec nm-applet'
 exec --no-startup-id i3-msg 'exec pasystray'
 exec --no-startup-id i3-msg 'exec setxkbmap -layout pl'
+exec --no-startup-id i3-msg 'exec kdeconnect-indicator'
+exec --no-startup-id i3-msg 'exec pasystray'
+exec --no-startup-id i3-msg 'xinput map-to-output "HUION Huion Tablet Pen Pen (0)" "DP-4"'
+exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1'
+exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.5'
+exec --no-startup-id i3-msg "exec feh --bg-scale ~/.config/i3/wall.png"
+
 
 for_window [class=".*"] border pixel 0
 for_window [class=".*"] border pixel 2
-hide_edge_borders yes
 
 #autostart
 #
@@ -229,11 +235,11 @@ set $PANEL_ACTIVE_TEXT "#ffffff"
 set $PANEL_INACTIVE_TEXT "#888888"
 
 bar {
-  status_command i3blocks -c ~/.config/i3/i3blocks.conf
+  status_command i3blocks -c ~/.config/i3blocks/config
   font pango:System San Francisco Display 10
   colors {
     separator #666666
-    background #222222
+    background #2D2D2D
     statusline #dddddd
     focused_workspace #0088CC #0088CC #ffffff
     active_workspace #333333 #333333 #ffffff

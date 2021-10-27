@@ -42,9 +42,14 @@ xterm*ScrollBar: false
 ! stop output to terminal from jumping down to bottom of scroll again
 xterm*scrollTtyOutput: false
 
-rofi.color-enabled: true
-rofi.color-window: #222222, #0088CC, #222222
-rofi.color-normal: #222222, #ffffff, #222222, #0088CC, #222222
+! rofi.color-enabled: true
+! rofi.color-window: #222222, #0088CC, #222222
+! rofi.color-normal: #222222, #ffffff, #222222, #0088CC, #222222
 
 xterm*metaSendsEscape: true
 xterm*eightBitInput: false
+
+rofi.color-window: #000000, #000000, #999999
+rofi.color-normal: #000000, #ffffff, #000000, #999999, #ffffff
+rofi.color-active: #000000, #ffffff, #000000, #999999, #ffffff
+rofi.color-urgent: #000000, #ffffff, #000000, #999999, #ffffff
