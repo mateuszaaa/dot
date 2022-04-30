@@ -57,6 +57,8 @@ bindsym $mod+b exec rofi-bluetooth
 bindsym $mod+shift+p exec "echo 'dn!YIVJG9A0#' | xclip -selection primary"
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+bindsym Print --release exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
+
 #
 #bindsym button3 floating toggle
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -198,7 +200,7 @@ bindsym $mod+r mode "resize"
 for_window [window_role="pop-up"] floating enable
 
 exec --no-startup-id i3-msg 'exec blueman-applet'
-exec --no-startup-id i3-msg 'exec autorandr --change'
+#exec --no-startup-id i3-msg 'exec autorandr --change'
 exec --no-startup-id i3-msg 'exec nm-applet'
 exec --no-startup-id i3-msg 'exec pasystray'
 exec --no-startup-id i3-msg 'exec setxkbmap -layout pl'

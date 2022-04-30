@@ -13,6 +13,7 @@ source $HOME/config/bookmarks
 source $HOME/config/functions
 source $HOME/config/zsh-config
 alias x="ls -la"
+alias connect="cp"
 #if [ -e $HOME/zsh-config ]; then
 #    source $HOME/zsh-config
 #fi
@@ -21,3 +22,7 @@ alias x="ls -la"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+function start_runner {
+    ssh root@$1 su - github -c "/bin/bash -c 'screen -S runner -dm bash -c \"cd /home/github/actions-runner; TOKEN=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 OWNER=mangata-finance REPO=mangata-node ./start.sh\"'"
+}

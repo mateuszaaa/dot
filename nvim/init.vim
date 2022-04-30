@@ -7,10 +7,12 @@ Plug 'sheerun/vim-polyglot'
 
 " LSP basic tweaking
 Plug 'neovim/nvim-lspconfig'
+" Plug 'simrat39/rust-tools.nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'nvim-lua/lsp-status.nvim'
-Plug 'nvim-lua/completion-nvim'
-" Plug 'nanotee/nvim-lsp-basics'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -42,10 +44,12 @@ Plug 'stephpy/vim-yaml'
 Plug 'tanvirtin/monokai.nvim'        " modern monokai style
 Plug 'itchyny/lightline.vim'         " status line
 
-" Plug 'simrat39/rust-tools.nvim'
 
 " Debugging (needs plenary from above as well)
 Plug 'mfussenegger/nvim-dap'
+
+Plug 'ruanyl/vim-gh-line'
+
 
 
 call plug#end()
@@ -120,7 +124,6 @@ function! LspStatus() abort
 endfunction
 
 " autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', enabled = {"ChainingHint", "TypeHint", "ParameterHint"} }
-autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost * :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', enabled = {"TypeHint", "ChainingHint", "ParameterHint"} }
 "autocmd BufEnter * lua require'completion'.on_attach()
 
 
@@ -130,33 +133,17 @@ let g:completion_enable_auto_popup = 1
 let g:mwDefaultHighlightingPalette = 'maximum'
 set completeopt=menu,noinsert,noselect
 
-" nmap <space>cr :LspRename<cr>
-" nmap <leader>a :LspCodeAction<cr>
-" nmap gt :LspTypeDefinition<cr>
-" nmap gi :LspImplementation<cr>
-" nmap gr :LspReferences<cr>
-" nmap gd :LspDefinition<cr>
-" nmap K  :LspHover<cr>
-" nmap ga :LspWorkspaceSymbol 
-"
-
 " auto formatting
 " autocmd BufWritePre *.ts LspFormat!
 
 nnoremap <C-p> <cmd>Files<cr>
 nnoremap <leader>; <cmd>Buffers<cr>
-" nnoremap <leader>b <cmd>Buffers<cr>
-" nnoremap <leader>cd lua vim.lsp.diagnostic.set_loclist()<cr>
-" nnoremap <leader>cd <Cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+nnoremap <leader>q; lua require('lsp_extensions.workspace.diagnostic').set_qf_list()<cr>
 
-nnoremap <silent> <leader>cd :lua vim.lsp.diagnostic.show_line_diagnostics({ border = "single" })<CR>
-nnoremap <silent> ]d :lua vim.lsp.diagnostic.goto_next({ popup_opts = { border = "single" }})<CR>
-nnoremap <silent> [d :lua vim.lsp.diagnostic.goto_prev({ popup_opts = { border = "single" }})<CR>
-
-sign define LspDiagnosticsSignError text=
-sign define LspDiagnosticsSignWarning text=
-sign define LspDiagnosticsSignInformation text=
-sign define LspDiagnosticsSignHint text=
+" sign define LspDiagnosticsSignError text=
+" sign define LspDiagnosticsSignWarning text=
+" sign define LspDiagnosticsSignInformation text=
+" sign define LspDiagnosticsSignHint text=
 
 hi HopNextKey guifg=Red gui=bold
 hi HopNextKey1 guifg=Orange gui=bold
@@ -189,28 +176,11 @@ function! s:qf_to_fzf(key, line) abort
   return l:filepath . ':' . a:line.lnum . ':' . a:line.col . ':' . a:line.text
 endfunction
 
-function! s:fzf_to_qf(filtered_list) abort
-  let list = map(a:filtered_list, 's:format_qf_line(v:val)')
-  if len(list) > 0
-    call setloclist(list)
-    copen
-  endif
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
 endfunction
-
-
-command! FzfLoc call fzf#run({
-      \ 'source': map(getloclist(0), function('<sid>qf_to_fzf')),
-      \ 'down':   '20',
-      \ 'sink*':   function('<sid>fzf_to_qf'),
-      \ 'options': '--reverse --multi --bind=ctrl-a:select-all,ctrl-d:deselect-all --prompt "quickfix> "',
-      \ })
-
-
-function! Func()
-    lua vim.lsp.diagnostic.set_loclist({open_loclist=false})
-    FzfLoc
-endfunction
-set nowrap
 
 lua require('lspsetup')
-
