@@ -47,7 +47,6 @@ Plug 'itchyny/lightline.vim'         " status line
 
 " Debugging (needs plenary from above as well)
 Plug 'mfussenegger/nvim-dap'
-
 Plug 'ruanyl/vim-gh-line'
 
 
@@ -131,7 +130,7 @@ let g:completion_matching_ignore_case = 0
 let g:completion_enable_auto_signature = 0 
 let g:completion_enable_auto_popup = 1 
 let g:mwDefaultHighlightingPalette = 'maximum'
-set completeopt=menu,noinsert,noselect
+set completeopt=menu,noinsert
 
 " auto formatting
 " autocmd BufWritePre *.ts LspFormat!
