@@ -33,8 +33,8 @@ cmp.setup({
     snippet = {
       -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
         -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
       end,
@@ -43,26 +43,8 @@ cmp.setup({
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      -- ['<C-n>'] = {
-      --   c = function(fallback)
-      --     local cmp = require('cmp')
-      --     if cmp.visible() then
-      --       cmp.select_next_item()
-      --     else
-      --       fallback()
-      --     end
-      --   end,
-      -- },
-      -- ['<C-p>'] = {
-      --   c = function(fallback)
-      --     local cmp = require('cmp')
-      --     if cmp.visible() then
-      --       cmp.select_prev_item()
-      --     else
-      --       fallback()
-      --     end
-      --   end,
-      -- },
+      ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i','c'}),
+      ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i','c'}),
       ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
       ['<C-e>'] = cmp.mapping({
           i = cmp.mapping.abort(),
@@ -74,13 +56,15 @@ cmp.setup({
         { name = 'nvim_lsp', priority = 10 },
         { name = 'nvim_lsp_signature_help' },
         -- { name = 'luasnip' },
-    }, {
-        { name = 'nvim_lua' },
-    }, {
-        { name = 'buffer' },
-        { name = 'path' },
-        { name = 'rg' },
-    }),
+    }
+    -- {
+    --     { name = 'nvim_lua' },
+    -- }, {
+    --     { name = 'buffer' },
+    --     { name = 'path' },
+    --     { name = 'rg' },
+    -- }
+    ),
 
   })
 
@@ -94,9 +78,10 @@ nvim_lsp.rust_analyzer.setup({
   settings = {
       ["rust-analyzer"] = {
           checkOnSave = { enable = false },
+          procMacro = { enable = false },
           diagnostics = {
               enable = true,
-              disabled = {"unresolved"},
+              disabled = {"unresolved", "unresolved-proc-macro"},
               enableExperimental = true,
           },}
       },
