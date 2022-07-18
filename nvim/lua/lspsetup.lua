@@ -54,13 +54,9 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp', priority = 10 },
-        { name = 'nvim_lsp_signature_help' },
-        -- { name = 'luasnip' },
+        { name = 'vsnip'},
+        { name = 'path' },
     }
-    -- {
-    --     { name = 'nvim_lua' },
-    -- }, {
-    --     { name = 'buffer' },
     --     { name = 'path' },
     --     { name = 'rg' },
     -- }
@@ -69,7 +65,7 @@ cmp.setup({
   })
 
   -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 
 
