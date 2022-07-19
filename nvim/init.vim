@@ -7,7 +7,6 @@ Plug 'sheerun/vim-polyglot'
 
 " LSP basic tweaking
 Plug 'neovim/nvim-lspconfig'
-" Plug 'simrat39/rust-tools.nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'nvim-lua/lsp-status.nvim'
 Plug 'hrsh7th/nvim-cmp'
@@ -16,6 +15,8 @@ Plug 'hrsh7th/vim-vsnip'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+" Debugging (needs plenary from above as well)
+Plug 'mfussenegger/nvim-dap'
 
 " Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -42,11 +43,13 @@ Plug 'stephpy/vim-yaml'
 
 " Styling
 Plug 'tanvirtin/monokai.nvim'        " modern monokai style
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 Plug 'itchyny/lightline.vim'         " status line
+Plug 'p00f/nvim-ts-rainbow'
 
 
-" Debugging (needs plenary from above as well)
-Plug 'mfussenegger/nvim-dap'
+
 Plug 'ruanyl/vim-gh-line'
 
 
