@@ -45,7 +45,8 @@ Plug 'stephpy/vim-yaml'
 Plug 'tanvirtin/monokai.nvim'        " modern monokai style
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-Plug 'itchyny/lightline.vim'         " status line
+" Plug 'itchyny/lightline.vim'         " status line
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'p00f/nvim-ts-rainbow'
 
 
@@ -98,11 +99,9 @@ set smartcase
 set number
 set list listchars=tab:▸\ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣
 
-"open editor in last place
-if has("autocmd")
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-\| exe "normal! g'\"" | endif
-endif
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+
 
 "configuration edit shortcuts
 nnoremap <Leader>ve :e ~/.config/nvim/init.vim<CR>
@@ -114,68 +113,13 @@ packadd termdebug
 let g:cargo_command="/home/dev/.cargo/bin/cargo"
 compiler cargo
 
-set updatetime=2000
-
-" Statusline
-function! LspStatus() abort
-  if luaeval('#vim.lsp.buf_get_clients() > 0')
-    return luaeval("require('lsp-status').status()")
-  endif
-  return ''
-endfunction
-
-" autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ prefix = ' » ', enabled = {"ChainingHint", "TypeHint", "ParameterHint"} }
-"autocmd BufEnter * lua require'completion'.on_attach()
-
-
-let g:completion_matching_ignore_case = 0
-let g:completion_enable_auto_signature = 0 
-let g:completion_enable_auto_popup = 1 
-let g:mwDefaultHighlightingPalette = 'maximum'
-set completeopt=menu,noinsert
-
-" auto formatting
-" autocmd BufWritePre *.ts LspFormat!
-
 nnoremap <C-p> <cmd>Files<cr>
 nnoremap <leader>; <cmd>Buffers<cr>
-nnoremap <leader>q; lua require('lsp_extensions.workspace.diagnostic').set_qf_list()<cr>
-
-" sign define LspDiagnosticsSignError text=
-" sign define LspDiagnosticsSignWarning text=
-" sign define LspDiagnosticsSignInformation text=
-" sign define LspDiagnosticsSignHint text=
-
-hi HopNextKey guifg=Red gui=bold
-hi HopNextKey1 guifg=Orange gui=bold
-hi HopNextKey2 guifg=Orange gui=bold
-hi HopUnmatched guifg=#999999
-hi CurrentWordTwins guifg=None guibg=#8CCBEA guifg=#000000 gui=underline,bold
-hi CurrentWord guifg=None guibg=None gui=bold
-
-set cursorcolumn
-set cursorline
-set signcolumn=auto:2
 
 nmap <Leader>g :GitGutterToggle<cr>
 nmap <Leader><Leader> :HopWord<cr>
 
-" autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 au BufRead,BufNewFile *.md setlocal textwidth=120
-
-function! s:format_qf_line(line)
-  let parts = split(a:line, ':')
-  return { 'filename': parts[0]
-         \,'lnum': parts[1]
-         \,'col': parts[2]
-         \,'text': join(parts[3:], ':')
-         \ }
-endfunction
-
-function! s:qf_to_fzf(key, line) abort
-  let l:filepath = expand('#' . a:line.bufnr . ':p')
-  return l:filepath . ':' . a:line.lnum . ':' . a:line.col . ':' . a:line.text
-endfunction
 
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
