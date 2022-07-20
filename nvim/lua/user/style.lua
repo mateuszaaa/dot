@@ -1,5 +1,28 @@
 vim.cmd("colorscheme monokai")
 
+-- overal
+vim.opt.mousefocus=false
+vim.opt.tabpagemax=100
+vim.opt.backup=false
+vim.opt.writebackup=false
+vim.opt.swapfile=false
+vim.opt.tabstop=4
+vim.opt.shiftwidth=4
+vim.opt.expandtab=true
+vim.opt.autoindent=ture
+vim.opt.smartindent=true
+vim.opt.smarttab=true
+vim.opt.ignorecase=true
+vim.opt.smartcase=true
+vim.opt.number=true
+
+-- whitespaces
+vim.opt.listchars.tabtab='▸ '
+vim.opt.listchars.precedes='←'
+vim.opt.listchars.extends='→'
+vim.opt.listchars.eol='↲'
+vim.opt.listchars.nbsp='␣'
+
 -- colors for \\ 
 vim.cmd("hi HopNextKey guifg=Red gui=bold")
 vim.cmd("hi HopNextKey1 guifg=Orange gui=bold")

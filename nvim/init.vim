@@ -83,24 +83,7 @@ endif
 
 syntax enable
 filetype plugin indent on
-set nomousefocus
-set tabpagemax=100
-set nobackup       "no backup files
-set nowritebackup  "only in case you don't want a backup file while editing
-set noswapfile     "no swap files
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set autoindent
-set smartindent
-set smarttab
-set ignorecase
-set smartcase
-set number
 set list listchars=tab:▸\ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣
-
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
 
 
 "configuration edit shortcuts
@@ -110,7 +93,6 @@ map H ^
 map L $
 
 packadd termdebug
-let g:cargo_command="/home/dev/.cargo/bin/cargo"
 compiler cargo
 
 nnoremap <C-p> <cmd>Files<cr>
