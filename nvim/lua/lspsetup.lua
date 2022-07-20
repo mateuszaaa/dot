@@ -102,6 +102,8 @@ cmp.setup({
 nvim_lsp.rust_analyzer.setup({
   settings = {
       ["rust-analyzer"] = {
+          cmd = { vim.env.HOME .. '/.cargo/bin/rust-analyzer' },
+          cmd_env = { RUSTUP_TOOLCHAIN = 'nightly-2022-05-11' },
           checkOnSave = { enable = false },
           procMacro = { enable = false },
           diagnostics = {
