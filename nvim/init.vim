@@ -184,4 +184,4 @@ function! ExecuteMacroOverVisualRange()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
-lua require('config')
+lua require('user.config')
