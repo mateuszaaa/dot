@@ -56,7 +56,6 @@ Plug 'ruanyl/vim-gh-line'
 
 call plug#end()
 
-colorscheme monokai
 set termguicolors
 "
 let g:lightline = {
@@ -185,4 +184,4 @@ function! ExecuteMacroOverVisualRange()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
-lua require('lspsetup')
+lua require('config')
