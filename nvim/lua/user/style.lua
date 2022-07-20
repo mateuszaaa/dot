@@ -1,6 +1,5 @@
-vim.cmd("colorscheme monokai")
+vim.cmd[[ colorscheme monokai ]]
 
--- overal
 vim.opt.mousefocus=false
 vim.opt.tabpagemax=100
 vim.opt.backup=false
@@ -15,6 +14,7 @@ vim.opt.smarttab=true
 vim.opt.ignorecase=true
 vim.opt.smartcase=true
 vim.opt.number=true
+vim.opt.termguicolors=true
 
 -- whitespaces
 vim.opt.listchars.tabtab='▸ '

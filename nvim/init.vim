@@ -57,54 +57,9 @@ Plug 'ruanyl/vim-gh-line'
 
 call plug#end()
 
-set termguicolors
-"
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'cocstatus'] ]
-      \ },
-      \ 'component_function': {
-      \   'filename': 'LightlineFilename',
-      \   'cocstatus': 'LspStatus',
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ "theme" : "tokyonight",
-      \ }
-function! LightlineFilename()
-  return expand('%:t') !=# '' ? @% : '[No Name]'
-endfunction
 
-if executable('rg')
-	set grepprg=rg\ --no-heading\ --vimgrep
-	set grepformat=%f:%l:%c:%m
-endif
-
-
-syntax enable
-filetype plugin indent on
-set list listchars=tab:▸\ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣
-
-
-"configuration edit shortcuts
-nnoremap <Leader>ve :e ~/.config/nvim/init.vim<CR>
-nnoremap <Leader>vs :source ~/.config/nvim/init.vim<CR>
-map H ^
-map L $
-
-packadd termdebug
-compiler cargo
-
-nnoremap <C-p> <cmd>Files<cr>
-nnoremap <leader>; <cmd>Buffers<cr>
-
-nmap <Leader>g :GitGutterToggle<cr>
 nmap <Leader><Leader> :HopWord<cr>
-
-au BufRead,BufNewFile *.md setlocal textwidth=120
-
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
-
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
