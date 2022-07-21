@@ -208,7 +208,7 @@ exec --no-startup-id i3-msg 'exec pasystray'
 exec --no-startup-id i3-msg 'xinput map-to-output "HUION Huion Tablet Pen Pen (0)" "DP-4"'
 exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1'
 exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.5'
-exec --no-startup-id i3-msg "exec feh --bg-scale ~/.config/i3/wall.png"
+exec --no-startup-id i3-msg "exec feh --bg-scale ~/.config/i3/wall.jpg"
 
 
 for_window [class=".*"] border pixel 0
