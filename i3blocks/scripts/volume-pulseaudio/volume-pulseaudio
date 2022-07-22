@@ -4,18 +4,11 @@
 set -a
 
 function bar {
-    # NC='\033[0m' # No Color
-    CHAR='▄'
-    # BLUE="0;136;204"
-    # GREY="45;45;45"
-    # BLACK="0;0;0"
-    #
-    # COLOR1="\033[38;2;${BLUE};48;2;${GREY}m"
-    # COLOR2="\033[38;2;${BLACK};48;2;${GREY}m"
-
-
-    for i in `seq $2`; do
-        if [ ${i} -lt $1 ]; then
+    STEP=$1
+    MAX=$2
+    ACTUAL=$3
+    for i in `seq 0 $1 $2`; do
+        if [ ${i} -le $3 ]; then
             printf "▅"
         else
             printf "▁"
@@ -33,7 +26,7 @@ AUDIO_LOW_SYMBOL=${AUDIO_LOW_SYMBOL:-'  '}
 
 AUDIO_MUTED_SYMBOL=${AUDIO_MUTED_SYMBOL:-'  '}
 
-AUDIO_DELTA=${AUDIO_DELTA:-5}
+AUDIO_DELTA=${AUDIO_DELTA:-10}
 
 DEFAULT_COLOR=${DEFAULT_COLOR:-"#ffffff"}
 MUTED_COLOR=${MUTED_COLOR:-"#a0a0a0"}
@@ -173,11 +166,11 @@ sed 's/.*= "\(.*\)".*/\1/')
         [[ $VOL -le $AUDIO_MED_THRESH ]] && SYMB=$AUDIO_MED_SYMBOL
         [[ $VOL -le $AUDIO_LOW_THRESH ]] && SYMB=$AUDIO_LOW_SYMBOL
         COLOR=$DEFAULT_COLOR
-        VOL=$(bar ${VOL} 12)
+        VOL=$(bar 10 100 ${VOL})
     else
         SYMB=$AUDIO_MUTED_SYMBOL
         COLOR=$MUTED_COLOR
-        VOL="▁▁▁▁▁▁▁▁▁▁▁▁"
+        VOL="▁▁▁▁▁▁▁▁▁▁▁"
     fi
 
     print_format "$LONG_FORMAT"

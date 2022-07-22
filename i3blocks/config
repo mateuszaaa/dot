@@ -46,13 +46,16 @@ markup=none
 #min_width=CPU 100.00%
 #color=#0088CC
 #separator=true
+#
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=5
+color=#EF6191 #0088CC
 
 [temperature]
-label=CPU 🌡
-color=#0088CC
+# label=CPU 
+color=#B967C7
 interval=10
-
-
 
 # Memory usage
 #
@@ -77,9 +80,9 @@ interval=10
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=HOME 
+label=/ 
 interval=30
-color=#0088CC
+color=#4DC0F5
 
 # Network interface monitoring
 #
@@ -87,16 +90,17 @@ color=#0088CC
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
 #IFACE=wlan0
-color=#00FF00
 interval=10
 separator=false
 separator=true
-color=#0088CC
+color=#81C784
 
 [wifi]
 label=wifi:
 interval=10
 separator=true
+
+# interval=1
 
 
 [volume-pulseaudio]
@@ -106,20 +110,16 @@ signal=10
 STEP=5%
 USE_ALSA_NAME=0
 USE_DESCRIPTION=1
-DEFAULT_COLOR=#0088CC
+DEFAULT_COLOR=#FFB64C
 
 [battery]
 label=BAT
 label=⚡
 interval=30
-
+color=#F77B71
 
 # Date Time
 #
-[time]
-command=date '+%Y-%m-%d %H:%M:%S'
-interval=5
-color=#0088CC
 
 # Generic media player support
 #

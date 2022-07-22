@@ -199,11 +199,11 @@ bindsym $mod+r mode "resize"
 
 for_window [window_role="pop-up"] floating enable
 
-exec --no-startup-id i3-msg 'exec blueman-applet'
+# exec --no-startup-id i3-msg 'exec blueman-applet'
 #exec --no-startup-id i3-msg 'exec autorandr --change'
 exec --no-startup-id i3-msg 'exec nm-applet'
 exec --no-startup-id i3-msg 'exec setxkbmap -layout pl'
-exec --no-startup-id i3-msg 'exec kdeconnect-indicator'
+# exec --no-startup-id i3-msg 'exec kdeconnect-indicator'
 exec --no-startup-id i3-msg 'exec pasystray'
 exec --no-startup-id i3-msg 'xinput map-to-output "HUION Huion Tablet Pen Pen (0)" "DP-4"'
 exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1'
@@ -236,8 +236,9 @@ set $PANEL_ACTIVE_TEXT "#ffffff"
 set $PANEL_INACTIVE_TEXT "#888888"
 
 bar {
+  position top
   status_command i3blocks -c ~/.config/i3blocks/config
-  font pango:System San Francisco Display 10
+  font pango:System San Francisco Display Bold 10
   colors {
     separator #666666
     background #2D2D2D
