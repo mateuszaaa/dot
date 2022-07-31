@@ -16,6 +16,7 @@ set $mod Mod4
 #font pango:monospace 8
 font pango:System San Francisco Display 8
 
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -238,6 +239,7 @@ set $PANEL_INACTIVE_TEXT "#888888"
 bar {
   position top
   status_command i3blocks -c ~/.config/i3blocks/config
+  # font pango:System San Francisco Display Bold 10
   font pango:System San Francisco Display Bold 10
   colors {
     separator #666666

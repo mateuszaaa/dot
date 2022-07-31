@@ -1,4 +1,4 @@
-require 'user.lsp'
+require 'user.lsp.lsp'
 require 'user.line'
 require 'user.style'
 require 'user.keymaps'

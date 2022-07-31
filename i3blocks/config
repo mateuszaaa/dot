@@ -47,10 +47,6 @@ markup=none
 #color=#0088CC
 #separator=true
 #
-[time]
-command=date '+%Y-%m-%d %H:%M:%S'
-interval=5
-color=#EF6191 #0088CC
 
 [temperature]
 # label=CPU 
@@ -104,7 +100,7 @@ separator=true
 
 
 [volume-pulseaudio]
-label= 
+label=
 interval=once
 signal=10
 STEP=5%
@@ -114,9 +110,14 @@ DEFAULT_COLOR=#FFB64C
 
 [battery]
 label=BAT
-label=⚡
+label=
 interval=30
 color=#F77B71
+
+[time]
+command=date '+%H:%M:%S'
+interval=5
+color=#EF6191 #0088CC
 
 # Date Time
 #
