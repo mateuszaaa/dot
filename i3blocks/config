@@ -48,6 +48,11 @@ markup=none
 #separator=true
 #
 
+[huion]
+label=Pen: 
+interval=once
+color=#4DC0F5
+
 [temperature]
 # label=CPU 
 color=#B967C7
@@ -69,6 +74,7 @@ interval=10
 #separator=true
 #interval=30
 #color=#0088CC
+#
 
 # Disk usage
 #
@@ -107,6 +113,8 @@ STEP=5%
 USE_ALSA_NAME=0
 USE_DESCRIPTION=1
 DEFAULT_COLOR=#FFB64C
+
+
 
 [battery]
 label=BAT

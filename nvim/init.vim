@@ -2,12 +2,12 @@ call plug#begin()
 
 " RUST SUPPORT
 Plug 'tpope/vim-fugitive'
-Plug 'timonv/vim-cargo'
+" Plug 'timonv/vim-cargo'
 Plug 'sheerun/vim-polyglot'
 
 " LSP basic tweaking
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/lsp_extensions.nvim'
+"Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'nvim-lua/lsp-status.nvim'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -52,6 +52,8 @@ Plug 'p00f/nvim-ts-rainbow'
 
 
 Plug 'ruanyl/vim-gh-line'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+
 
 
 
@@ -64,5 +66,10 @@ function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
+
+nnoremap H ^
+nnoremap L $
+vnoremap H ^
+vnoremap L $
 
 lua require('user.config')

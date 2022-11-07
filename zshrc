@@ -31,6 +31,7 @@ function nnn {
     notify-send 'Failure' "dir: $(pwd)\ncmd: $@" --icon=dialog-information --expire-time `bc <<< 1000*60*24` 
   fi
 }
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 function start_runner {
     ssh root@$1 su - github -c "/bin/bash -c 'screen -S runner -dm bash -c \"cd /home/github/actions-runner; TOKEN=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 OWNER=mangata-finance REPO=mangata-node ./start.sh\"'"

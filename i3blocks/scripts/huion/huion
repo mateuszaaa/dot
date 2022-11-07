@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Displays the default device, volume, and mute status for i3blocks
+
+set -a
+
+AVAILABLE_SCREENS=( $(xrandr | grep -E "connected.*[0-9]+x[0-9]+" | cut -d " " -f 1) )
+STATE_FILE=/tmp/huion_active_screen
+PEN_ID=$(xinput | grep -E "HUION.*stylus" | grep -Eo "id=[0-9]+" | grep -Eo "[0-9]+")
+
+
+if [ -z "$PEN_ID" ]; then
+	echo "N/A"
+	exit 0
+fi
+
+
+if [ ! -e $STATE_FILE ]; then
+	CHOSEN_SCREEN=${AVAILABLE_SCREENS[0]}
+else
+	CURRENT_SCREEN=$(cat ${STATE_FILE})
+	for i in ${!AVAILABLE_SCREENS[*]}; do
+		SCREEN=${AVAILABLE_SCREENS[${i}]};
+		if [ "${SCREEN}" == "${CURRENT_SCREEN}" ]; then
+			NEXT_INDEX=$(( $i + 1 ))
+			if [[ $NEXT_INDEX < ${#AVAILABLE_SCREENS[*]} ]]; then
+				CHOSEN_SCREEN=${AVAILABLE_SCREENS[${NEXT_INDEX}]}
+			else
+				CHOSEN_SCREEN=${AVAILABLE_SCREENS[0]}
+			fi
+		fi
+	done
+fi
+
+xsetwacom set "HUION Huion Tablet Pad pad" Button 1 "key ctrl z"
+
+if [ -n "$BLOCK_BUTTON" ]; then
+	echo $CHOSEN_SCREEN > $STATE_FILE
+	xinput map-to-output $PEN_ID $CHOSEN_SCREEN
+	#xsetwacom set "HUION Huion Tablet Pad pad" Button 2 "key shift S"
+	#xsetwacom set "HUION Huion Tablet Pad pad" Button 3 "key ctrl z"
+	#xsetwacom set "HUION Huion Tablet Pad pad" Button 8 "key delete"
+
+	cat $STATE_FILE
+else
+	if [ ! -e $STATE_FILE ]; then
+		echo "All"
+	else
+		cat $STATE_FILE
+	fi
+fi
+

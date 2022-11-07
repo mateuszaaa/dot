@@ -15,6 +15,7 @@ vim.opt.ignorecase=true
 vim.opt.smartcase=true
 vim.opt.number=true
 vim.opt.termguicolors=true
+vim.opt.guifont="DejaVuSansMono Nerd Font:h8"
 
 -- whitespaces
 vim.opt.listchars.tabtab='▸ '
