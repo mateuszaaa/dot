@@ -53,7 +53,12 @@ require("packer").startup(function(use)
 
   use("dominikduda/vim_current_word")
   use("machakann/vim-highlightedyank")
-  use("phaazon/hop.nvim")
+  use({
+    "phaazon/hop.nvim",
+    config = function()
+      require("hop").setup()
+    end
+  })
 
   use("tpope/vim-fugitive")
   use("airblade/vim-gitgutter")
@@ -77,7 +82,14 @@ require("packer").startup(function(use)
       -- your configuration comes here
     }
   end
-}
+  }
+
+  use({
+    "j-hui/fidget.nvim",
+    config = function()
+      require("fidget").setup()
+    end
+  })
 
 end)
 

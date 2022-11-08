@@ -3,8 +3,6 @@ lsp_status.register_progress()
 local nvim_lsp = require('lspconfig')
 local cmp = require('cmp')
 
-require'hop'.setup()
-
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = { "c", "lua", "rust" },
@@ -158,3 +156,4 @@ cmp.setup({
     }
     ),
   })
+

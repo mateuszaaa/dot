@@ -4,6 +4,7 @@ vim.cmd [[ tnoremap <Esc> <C-\><C-n> ]]
 vim.keymap.set({'n', 'v'}, 'H', '^', {noremap = true, silent = true})
 vim.keymap.set({'n', 'v'}, 'L', '$', {noremap = true, silent = true})
 vim.keymap.set('n', '<C-p>', '<cmd>Files<cr>', {noremap = true, silent = true})
+vim.keymap.set('n', '<Leader><Leader>', '<cmd>HopWord<cr>', {noremap = true, silent = true})
 
 vim.cmd([[
     cnoreabbrev W! w!
