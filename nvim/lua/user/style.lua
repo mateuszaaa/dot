@@ -38,5 +38,8 @@ vim.cmd("hi CurrentWord guifg=None guibg=None gui=bold")
 vim.opt.cursorcolumn = true
 vim.opt.cursorline = true
 vim.opt.signcolumn = "auto:2"
-vim.opt.completeopt = "menu,noinsert"
+vim.opt.completeopt = "menu,noinsert,noselect"
+
+-- Avoid showing extra messages when using completion
+vim.opt.shortmess = vim.opt.shortmess + "c"
 
