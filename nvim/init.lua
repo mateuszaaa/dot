@@ -17,14 +17,6 @@ require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
   -- Collection of common configurations for the Nvim LSP client
   use("neovim/nvim-lspconfig")
-  -- Visualize lsp progress
-  use({
-    "j-hui/fidget.nvim",
-    config = function()
-      require("fidget").setup()
-    end
-  })
-
   -- Autocompletion framework
   use("hrsh7th/nvim-cmp")
   use({
@@ -76,6 +68,17 @@ require("packer").startup(function(use)
   use("windwp/nvim-autopairs")
 
   use("ruanyl/vim-gh-line")
+
+  -- Lua
+  use { "folke/trouble.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
+  config = function()
+    require("trouble").setup {
+      -- your configuration comes here
+    }
+  end
+}
+
 end)
 
 -- the first run will install packer and our plugins
