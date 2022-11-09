@@ -26,7 +26,10 @@ require("packer").startup(function(use)
     "hrsh7th/cmp-vsnip",
     -- cmp Path completion
     "hrsh7th/cmp-path",
+    -- cmp Buffer completion
     "hrsh7th/cmp-buffer",
+    -- cmp signature completion
+    "hrsh7th/cmp-nvim-lsp-signature-help",
     after = { "hrsh7th/nvim-cmp" },
     requires = { "hrsh7th/nvim-cmp" },
   })
@@ -34,23 +37,22 @@ require("packer").startup(function(use)
 
   -- Adds extra functionality over rust analyzer
   use("simrat39/rust-tools.nvim")
-
+  
   -- Optional
   use("nvim-lua/popup.nvim")
   use("nvim-lua/plenary.nvim")
   use("nvim-telescope/telescope.nvim")
   use("mfussenegger/nvim-dap")
-
+  
   -- Fuzzy Finder
   use {"junegunn/fzf", run = ":call fzf#install()" }
   use {"junegunn/fzf.vim" }
-
+  
   -- Statusline
   use("nvim-lualine/lualine.nvim")
-  use("nvim-lua/lsp-status.nvim")
   -- tab or space
   use("tpope/vim-sleuth")
-
+  
   use("dominikduda/vim_current_word")
   use("machakann/vim-highlightedyank")
   use({
@@ -59,21 +61,21 @@ require("packer").startup(function(use)
       require("hop").setup()
     end
   })
-
+  
   use("tpope/vim-fugitive")
   use("airblade/vim-gitgutter")
-
+  
   use("tomtom/tcomment_vim")
-
+  
   use("tanvirtin/monokai.nvim")
-
+  
   -- treesitter
   use("nvim-treesitter/nvim-treesitter")
   use("p00f/nvim-ts-rainbow")
   use("windwp/nvim-autopairs")
-
+  
   use("ruanyl/vim-gh-line")
-
+  
   -- Lua
   use { "folke/trouble.nvim",
   requires = "kyazdani42/nvim-web-devicons",
