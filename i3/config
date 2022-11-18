@@ -44,8 +44,10 @@ gaps inner 10
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec "rofi -combi-modi window,run -show combi"
-bindsym $mod+x exec "scrot -s /tmp/shot.png"
-bindsym $mod+c exec "spectacle -b -r -c"
+bindsym $mod+x exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
+bindsym $mod+c exec "scrot -o -s /tmp/ss.png && pinta /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
+bindsym Print --release exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
+bindsym $mod+Print --release exec "scrot -o -s /tmp/ss.png && pinta /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
 bindsym $mod+m exec "~/config/bin/rofi-pass"
 bindsym $mod+i exec i3lock -c 000000
 bindsym XF86AudioRaiseVolume exec "amixer set 'Master' 10%+ unmute"
@@ -55,11 +57,9 @@ bindsym XF86Sleep exec "systemctl -i suspend"
 bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
 bindsym $mod+b exec rofi-bluetooth
-bindsym $mod+shift+p exec "echo 'dn!YIVJG9A0#' | xclip -selection primary"
 bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
-bindsym Print --release exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
-
+# bindsym Print --release exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
 #
 #bindsym button3 floating toggle
 # There also is the (new) i3-dmenu-desktop which only displays applications

@@ -7,6 +7,21 @@ vim.keymap.set('n', '<C-p>', '<cmd>Files<cr>', {noremap = true, silent = true})
 vim.keymap.set('n', '<Leader><Leader>', '<cmd>HopWord<cr>', {noremap = true, silent = true})
 
 vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
+
+vim.cmd([[
+  au TermOpen * tnoremap <Esc> <c-\><c-n>
+  au FileType fzf tunmap <Esc>
+]])
+
+
+
+
+vim.cmd([[
     cnoreabbrev W! w!
     cnoreabbrev W1 w!
     cnoreabbrev w1 w!
