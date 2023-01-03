@@ -1,6 +1,12 @@
 local nvim_lsp = require('lspconfig')
 local cmp = require('cmp')
 
+
+local extension_path = vim.env.HOME .. ".vscode-oss/extensions/vadimcn.vscode-lldb-1.8.1-universal/"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+
+
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = { "c", "lua", "rust", "typescript", "javascript" },
@@ -60,29 +66,108 @@ local on_attach = function(client, bufnr)
 
 end
 
-
-
-nvim_lsp.rust_analyzer.setup({
-  settings = {
+local rt = require("rust-tools")
+rt.setup({
+  server = {
+    settings = {
       ["rust-analyzer"] = {
-          -- cmd = { '/home/dev/rust-analyzer-x86_64-unknown-linux-gnu' },
-          -- cmd_env = { RUSTUP_TOOLCHAIN = 'nightly-2022-05-11' },
-          checkOnSave = { enable = false },
-          procMacro = { enable = true },
-          diagnostics = {
-              enable = true,
-              disabled = {"unresolved", "unresolved-proc-macro"},
-              enableExperimental = true,
-          },
-          cargo = {
-            allFeatures = {enable= true},
-            buildScript = {enable= false},
-          },
-        },
+	checkOnSave = {
+	  enable = false,
+	  command = "check",
+	  extraArgs = {},
+	},
+	procMacro = { enable = true },
+	diagnostics = {
+	  enable = true,
+	  disabled = {"unresolved", "unresolved-proc-macro"},
+	  enableExperimental = true,
+	},
+	cargo = {
+	  allFeatures = {enable = true},
+	  buildScripts = {enable = false},
+	},
       },
-  on_attach = on_attach,
-  capabilities = capabilities
-  })
+    },
+    standalone = false,
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      -- vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- -- Code action groups
+      -- vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+
+      vim.opt.updatetime = 100
+      local diag_float_grp = vim.api.nvim_create_augroup("DiagnosticFloat", { clear = true })
+      vim.api.nvim_create_autocmd("CursorHold", {
+	      callback = function()
+		      vim.diagnostic.open_float(nil, { focusable = false })
+	      end,
+	      group = diag_float_grp,
+      })
+      local opts = { noremap=true, silent=true }
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev({ border = "single" })<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next({ border = "single" })<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cd', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+      vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>db', '<cmd>lua require\'dap\'.toggle_breakpoint()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dc', '<cmd>lua require\'dap\'.continue()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dO', '<cmd>lua require\'dap\'.step_out()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dn', '<cmd>lua require\'dap\'.step_into()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dN', '<cmd>lua require\'dap\'.step_over()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dd', '<cmd>lua require\'dap\'.run_last()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dg', '<cmd>lua require\'dap\'.run_to_cursor()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dC', '<cmd>lua require\'dap\'.close()<CR>', opts)
+      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dt', '<cmd>lua require\'dap\'.repl.open()<CR>', opts)
+
+    --       nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
+    -- nnoremap <silent> <F10> <Cmd>lua require'dap'.step_over()<CR>
+    -- nnoremap <silent> <F11> <Cmd>lua require'dap'.step_into()<CR>
+    -- nnoremap <silent> <F12> <Cmd>lua require'dap'.step_out()<CR>
+    -- nnoremap <silent> <Leader>b <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+    -- nnoremap <silent> <Leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+    -- nnoremap <silent> <Leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+    -- nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
+    -- nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
+
+	end,
+      },
+      dap = {
+	adatper = {
+	  type = "server",
+	  port = "${port}",
+	  host = "127.0.0.1",
+	  executable = {
+	    command = "/usr/bin/lldb-vscode",
+	    args = {  "--port", "${port}" },
+	  },
+	}
+      }
+    })
+
+require("dapui").setup({})
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
 
 nvim_lsp.tsserver.setup({
   on_attach = on_attach,
@@ -94,14 +179,48 @@ nvim_lsp.gopls.setup({
   capabilities = capabilities
   })
 
+local signs = {
+  { name = "DiagnosticSignError", text = "" },
+  { name = "DiagnosticSignWarn", text = "" },
+  { name = "DiagnosticSignHint", text = "" },
+  { name = "DiagnosticSignInfo", text = "" },
+}
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = true,
-  }
-)
+for _, sign in ipairs(signs) do
+  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+end
+
+local config = {
+  virtual_text = true,
+  -- enables lsp_lines but we want to start disabled
+  virtual_lines = false,
+  -- show signs
+  signs = {
+    active = signs,
+  },
+  update_in_insert = true,
+  underline = true,
+  severity_sort = true,
+  float = {
+    focus = false,
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
+}
+
+vim.diagnostic.config(config)
+
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--     vim.lsp.diagnostic.on_publish_diagnostics, {
+--     virtual_text = true,
+--     signs = true,
+--     update_in_insert = true,
+--   }
+-- )
 
 vim.lsp.handlers["textDocument/hover"] =
   vim.lsp.with(

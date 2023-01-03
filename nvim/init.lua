@@ -17,6 +17,7 @@ require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
   -- Collection of common configurations for the Nvim LSP client
   use("neovim/nvim-lspconfig")
+
   -- Autocompletion framework
   use("hrsh7th/nvim-cmp")
   use({
@@ -37,12 +38,28 @@ require("packer").startup(function(use)
 
   -- Adds extra functionality over rust analyzer
   use("simrat39/rust-tools.nvim")
+  use('nvim-lua/plenary.nvim')
+  use('mfussenegger/nvim-dap')
+  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
   
   -- Optional
   use("nvim-lua/popup.nvim")
-  use("nvim-lua/plenary.nvim")
-  use("nvim-telescope/telescope.nvim")
-  use("mfussenegger/nvim-dap")
+
+  use {
+  'nvim-telescope/telescope-ui-select.nvim',
+  requires = { "nvim-telescope/telescope.nvim" },
+  config = function ()
+    require("telescope").setup {
+      extensions = {
+        ["ui-select"] = {
+          require("telescope.themes").get_dropdown {}
+        }
+      }
+    }
+    require("telescope").load_extension("ui-select")
+  end
+  }
+
   
   -- Fuzzy Finder
   use {"junegunn/fzf", run = ":call fzf#install()" }

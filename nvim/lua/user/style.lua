@@ -42,4 +42,3 @@ vim.opt.completeopt = "menu,noinsert,noselect"
 
 -- Avoid showing extra messages when using completion
 vim.opt.shortmess = vim.opt.shortmess + "c"
-
