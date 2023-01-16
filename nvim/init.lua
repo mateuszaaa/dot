@@ -4,7 +4,7 @@ local ensure_packer = function()
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
   if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-    vim.cmd([[packadd packer.nvim]])
+    -- vim.cmd("[[packadd packer.nvim]]")
     return true
   end
   return false
@@ -98,7 +98,18 @@ require("packer").startup(function(use)
   requires = "kyazdani42/nvim-web-devicons",
   config = function()
     require("trouble").setup {
-      -- your configuration comes here
+     mode = "document_diagnostics",
+     auto_preview = false,
+     auto_fold = false,
+     use_diagnostic_signs = false,
+     -- signs = {
+     --    -- icons / text used for a diagnostic
+     --    error = "",
+     --    warning = "",
+     --    hint = "",
+     --    information = "",
+     --    other = "﫠"
+     --  },
     }
   end
   }
