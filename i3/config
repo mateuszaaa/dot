@@ -57,7 +57,8 @@ bindsym XF86Sleep exec "systemctl -i suspend"
 bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
 bindsym $mod+b exec rofi-bluetooth
-bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym $mod+comma exec "warpd --hint"
+bindsym --release Caps_Lok exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 # bindsym Print --release exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
 #
@@ -210,6 +211,7 @@ exec --no-startup-id i3-msg 'xinput map-to-output "HUION Huion Tablet Pen Pen (0
 exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1'
 exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.5'
 exec --no-startup-id i3-msg "exec feh --bg-scale ~/.config/i3/wall.jpg"
+# exec --no-startup-id i3-msg "warpd"
 
 
 for_window [class=".*"] border pixel 0
