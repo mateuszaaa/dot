@@ -15,36 +15,31 @@ local packer_bootstrap = ensure_packer()
 require("packer").startup(function(use)
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
-  -- Collection of common configurations for the Nvim LSP client
-  use("neovim/nvim-lspconfig")
 
-  -- Autocompletion framework
-  use("hrsh7th/nvim-cmp")
-  use({
-    -- cmp LSP completion
-    "hrsh7th/cmp-nvim-lsp",
-    -- cmp Snippet completion
-    "hrsh7th/cmp-vsnip",
-    -- cmp Path completion
-    "hrsh7th/cmp-path",
-    -- cmp Buffer completion
-    "hrsh7th/cmp-buffer",
-    -- cmp signature completion
-    "hrsh7th/cmp-nvim-lsp-signature-help",
-    after = { "hrsh7th/nvim-cmp" },
-    requires = { "hrsh7th/nvim-cmp" },
-  })
-  use('hrsh7th/vim-vsnip')
+  use {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    requires = {
+      -- LSP Support
+      {'neovim/nvim-lspconfig'},
+      {
+        'williamboman/mason.nvim',
+        run = function()
+          pcall(vim.cmd, 'MasonUpdate')
+        end,
+      },
+      {'williamboman/mason-lspconfig.nvim'},
+      -- Autocompletion
+      {'hrsh7th/nvim-cmp'},
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'L3MON4D3/LuaSnip'},
+      -- Rust tools for RustRunnables & RustDebuggables
+      { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    }
+  }
 
   -- Adds extra functionality over rust analyzer
-  use("simrat39/rust-tools.nvim")
-  use('nvim-lua/plenary.nvim')
-  use('mfussenegger/nvim-dap')
-  use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
-  
-  -- Optional
   use("nvim-lua/popup.nvim")
-
   use {
   'nvim-telescope/telescope-ui-select.nvim',
   requires = { "nvim-telescope/telescope.nvim" },
@@ -59,6 +54,7 @@ require("packer").startup(function(use)
     require("telescope").load_extension("ui-select")
   end
   }
+  use { "simrat39/rust-tools.nvim"}
 
   
   -- Fuzzy Finder
@@ -81,9 +77,7 @@ require("packer").startup(function(use)
   
   use("tpope/vim-fugitive")
   use("airblade/vim-gitgutter")
-  
   use("tomtom/tcomment_vim")
-  
   use("tanvirtin/monokai.nvim")
   
   -- treesitter
@@ -93,26 +87,26 @@ require("packer").startup(function(use)
   
   use("ruanyl/vim-gh-line")
   
-  -- Lua
-  use { "folke/trouble.nvim",
-  requires = "kyazdani42/nvim-web-devicons",
-  config = function()
-    require("trouble").setup {
-     mode = "document_diagnostics",
-     auto_preview = false,
-     auto_fold = false,
-     use_diagnostic_signs = false,
-     -- signs = {
-     --    -- icons / text used for a diagnostic
-     --    error = "",
-     --    warning = "",
-     --    hint = "",
-     --    information = "",
-     --    other = "﫠"
-     --  },
-    }
-  end
-  }
+  -- -- Lua
+  -- use { "folke/trouble.nvim",
+  -- requires = "kyazdani42/nvim-web-devicons",
+  -- config = function()
+  --   require("trouble").setup {
+  --    mode = "document_diagnostics",
+  --    auto_preview = false,
+  --    auto_fold = false,
+  --    use_diagnostic_signs = false,
+  --    -- signs = {
+  --    --    -- icons / text used for a diagnostic
+  --    --    error = "",
+  --    --    warning = "",
+  --    --    hint = "",
+  --    --    information = "",
+  --    --    other = "﫠"
+  --    --  },
+  --   }
+  -- end
+  -- }
 
   use({
     "j-hui/fidget.nvim",
@@ -134,6 +128,8 @@ require("packer").startup(function(use)
 }
 
 end)
+
+
 
 -- the first run will install packer and our plugins
 if packer_bootstrap then
