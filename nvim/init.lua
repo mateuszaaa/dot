@@ -32,7 +32,9 @@ require("packer").startup(function(use)
       -- Autocompletion
       {'hrsh7th/nvim-cmp'},
       {'hrsh7th/cmp-nvim-lsp'},
-      {'L3MON4D3/LuaSnip'},
+      {'hrsh7th/cmp-vsnip'},
+      {'hrsh7th/vim-vsnip'},
+      {'hrsh7th/cmp-nvim-lsp-signature-help'},
       -- Rust tools for RustRunnables & RustDebuggables
       { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     }
