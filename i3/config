@@ -32,7 +32,7 @@ font pango:System San Francisco Display 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec alacritty
 for_window [class=".*"] border pixel 0 
 
 # kill focused window
@@ -48,7 +48,7 @@ bindsym $mod+x exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t im
 bindsym $mod+c exec "scrot -o -s /tmp/ss.png && pinta /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
 bindsym Print --release exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
 bindsym $mod+Print --release exec "scrot -o -s /tmp/ss.png && pinta /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
-bindsym $mod+m exec "~/config/bin/rofi-pass"
+bindsym $mod+m exec "/usr/bin/rofi-pass"
 bindsym $mod+i exec i3lock -c 000000
 bindsym XF86AudioRaiseVolume exec "amixer set 'Master' 10%+ unmute"
 bindsym XF86AudioLowerVolume exec "amixer set 'Master' 10%- unmute"
@@ -57,8 +57,10 @@ bindsym XF86Sleep exec "systemctl -i suspend"
 bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
 bindsym $mod+b exec rofi-bluetooth
+bindsym $mod+p workspace next
+bindsym $mod+u workspace prev
 bindsym $mod+comma exec "warpd --hint"
-bindsym --release Caps_Lok exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 # bindsym Print --release exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
 #
@@ -96,8 +98,8 @@ bindsym $mod+Shift+Right move right
 #bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $mod+p split h
-bindsym $mod+u split v
+# bindsym $mod+p split h
+# bindsym $mod+u split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -207,7 +209,6 @@ exec --no-startup-id i3-msg 'exec nm-applet'
 exec --no-startup-id i3-msg 'exec setxkbmap -layout pl'
 # exec --no-startup-id i3-msg 'exec kdeconnect-indicator'
 exec --no-startup-id i3-msg 'exec pasystray'
-exec --no-startup-id i3-msg 'xinput map-to-output "HUION Huion Tablet Pen Pen (0)" "DP-4"'
 exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1'
 exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.5'
 exec --no-startup-id i3-msg "exec feh --bg-scale ~/.config/i3/wall.jpg"
@@ -242,7 +243,9 @@ bar {
   position top
   status_command i3blocks -c ~/.config/i3blocks/config
   # font pango:System San Francisco Display Bold 10
-  font pango:System San Francisco Display Bold 10
+  # install awesome-terminal-fonts
+  # fc-cache -f -v
+  font pango: Font Awesome, System San Francisco Display Bold 10
   colors {
     separator #666666
     background #2D2D2D

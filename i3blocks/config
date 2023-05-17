@@ -35,10 +35,6 @@ markup=none
 # The second parameter overrides the mixer selection
 # See the script for details.
 
-#[load_average]
-#label=LOAD 
-#interval=10
-#color=#0088CC
 #
 #[cpu_usage]
 #label=CPU 
@@ -47,26 +43,42 @@ markup=none
 #color=#0088CC
 #separator=true
 #
+[crypto]
+SYMBOL=KSMUSDT
+label=KSM: 
+interval=3600
+color=#2a9d8f
+
+[crypto]
+SYMBOL=BTCUSDT
+label=BTC: 
+interval=3600
+color=#2a9d8f
+
 
 [huion]
-label=Pen: 
+label=   
 interval=once
-color=#4DC0F5
+color=#ffca3a
+
+[load_average]
+label=   
+interval=10
+color=#ff8c42
 
 [temperature]
-# label=CPU 
-color=#B967C7
+label=  
+color=#8ac926
 interval=10
 
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
-#[memory]
-##label= 💾
-#label=RAM: 
-#separator=true
-#interval=30
-#color=#0088CC
+[memory]
+label=  
+separator=true
+interval=30
+color=#1982c4
 #
 #[memory]
 #label=SWAP: 
@@ -82,9 +94,9 @@ interval=10
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=/ 
+label=  
 interval=30
-color=#4DC0F5
+color=#b100e8
 
 # Network interface monitoring
 #
@@ -92,10 +104,11 @@ color=#4DC0F5
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
 #IFACE=wlan0
+label=  
 interval=10
 separator=false
 separator=true
-color=#81C784
+color=#ffbe0b
 
 [wifi]
 label=wifi:
@@ -104,28 +117,27 @@ separator=true
 
 # interval=1
 
-
 [volume-pulseaudio]
-label=
+label=  
 interval=once
 signal=10
 STEP=5%
 USE_ALSA_NAME=0
 USE_DESCRIPTION=1
-DEFAULT_COLOR=#FFB64C
+DEFAULT_COLOR=#fb5607
 
 
 
 [battery]
-label=BAT
-label=
+label= 
 interval=30
-color=#F77B71
+color=#ff006e
 
 [time]
+label=  
 command=date '+%H:%M:%S'
 interval=5
-color=#EF6191 #0088CC
+color=#43bccd
 
 # Date Time
 #

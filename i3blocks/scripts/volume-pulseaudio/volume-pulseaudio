@@ -158,10 +158,15 @@ awk '/^\s*\*/{f=1}/^\s*index:/{f=0}f' |\
 grep "device.description" |\
 head -n1 |\
 sed 's/.*= "\(.*\)".*/\1/')
-        NAME=${DESCRIPTION:-$NAME}
+        if [[ "$DESCRIPTION" =~ 17h/19h ]]; then
+            NAME=Laptop
+        else
+            NAME=${DESCRIPTION:-$NAME}
+        fi
     fi
 
     if [[ $MUTED =~ "no" ]] ; then
+        notify-send "$NAME"
         SYMB=$AUDIO_HIGH_SYMBOL
         [[ $VOL -le $AUDIO_MED_THRESH ]] && SYMB=$AUDIO_MED_SYMBOL
         [[ $VOL -le $AUDIO_LOW_THRESH ]] && SYMB=$AUDIO_LOW_SYMBOL

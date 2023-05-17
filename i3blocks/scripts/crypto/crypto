@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Displays the default device, volume, and mute status for i3blocks
+
+set -a
+curl -s https://api.binance.com/api/v1/ticker/price\?symbol\=$SYMBOL | grep -oE "[0-9]+.[0-9]{0,4}" | head -1
