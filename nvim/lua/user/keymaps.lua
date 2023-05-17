@@ -3,8 +3,10 @@ vim.cmd [[ tnoremap <Esc> <C-\><C-n> ]]
 
 vim.keymap.set({'n', 'v'}, 'H', '^', {noremap = true, silent = true})
 vim.keymap.set({'n', 'v'}, 'L', '$', {noremap = true, silent = true})
-vim.keymap.set('n', '<C-p>', '<cmd>Files<cr>', {noremap = true, silent = true})
+vim.keymap.set('n', '<C-p>', '<cmd>GFiles<cr>', {noremap = true, silent = true})
 vim.keymap.set('n', '<Leader><Leader>', '<cmd>HopWord<cr>', {noremap = true, silent = true})
+vim.keymap.set('n', '<Leader>t', '<cmd>TroubleToggle document_diagnostics<cr>', {noremap = true, silent = true})
+vim.keymap.set('n', '<Leader>r', '<cmd>RustRunnables<cr>', {noremap = true, silent = true})
 
 vim.cmd([[
   augroup packer_user_config
