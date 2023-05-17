@@ -22,6 +22,10 @@ vim.cmd([[
 
 
 
+vim.cmd([[command! R RustLastRun ]])
+vim.cmd([[command! D RustLastDebug ]])
+vim.cmd([[command! RR RustRunnables ]])
+vim.cmd([[command! DD RustDebuggables ]])
 
 vim.cmd([[
     cnoreabbrev W! w!

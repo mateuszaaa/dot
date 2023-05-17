@@ -256,22 +256,22 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: telescope-ui-select.nvim
-time([[Config for telescope-ui-select.nvim]], true)
-try_loadstring("\27LJ\2\nÍ\1\0\0\b\0\n\1\0246\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\a\0005\3\5\0004\4\3\0006\5\0\0'\a\3\0B\5\2\0029\5\4\0054\a\0\0B\5\2\0?\5\0\0=\4\6\3=\3\b\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\t\0'\2\6\0B\0\2\1K\0\1\0\19load_extension\15extensions\1\0\0\14ui-select\1\0\0\17get_dropdown\21telescope.themes\nsetup\14telescope\frequire\3€€À™\4\0", "config", "telescope-ui-select.nvim")
-time([[Config for telescope-ui-select.nvim]], false)
--- Config for: fidget.nvim
-time([[Config for fidget.nvim]], true)
-try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
-time([[Config for fidget.nvim]], false)
--- Config for: hop.nvim
-time([[Config for hop.nvim]], true)
-try_loadstring("\27LJ\2\n1\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\bhop\frequire\0", "config", "hop.nvim")
-time([[Config for hop.nvim]], false)
 -- Config for: octo.nvim
 time([[Config for octo.nvim]], true)
 try_loadstring("\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tocto\frequire\0", "config", "octo.nvim")
 time([[Config for octo.nvim]], false)
+-- Config for: telescope-ui-select.nvim
+time([[Config for telescope-ui-select.nvim]], true)
+try_loadstring("\27LJ\2\nÍ\1\0\0\b\0\n\1\0246\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\a\0005\3\5\0004\4\3\0006\5\0\0'\a\3\0B\5\2\0029\5\4\0054\a\0\0B\5\2\0?\5\0\0=\4\6\3=\3\b\2B\0\2\0016\0\0\0'\2\1\0B\0\2\0029\0\t\0'\2\6\0B\0\2\1K\0\1\0\19load_extension\15extensions\1\0\0\14ui-select\1\0\0\17get_dropdown\21telescope.themes\nsetup\14telescope\frequire\3€€À™\4\0", "config", "telescope-ui-select.nvim")
+time([[Config for telescope-ui-select.nvim]], false)
+-- Config for: hop.nvim
+time([[Config for hop.nvim]], true)
+try_loadstring("\27LJ\2\n1\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\bhop\frequire\0", "config", "hop.nvim")
+time([[Config for hop.nvim]], false)
+-- Config for: fidget.nvim
+time([[Config for fidget.nvim]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
+time([[Config for fidget.nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
