@@ -98,14 +98,14 @@ require("packer").startup(function(use)
   --    auto_preview = false,
   --    auto_fold = false,
   --    use_diagnostic_signs = false,
-  --    -- signs = {
-  --    --    -- icons / text used for a diagnostic
-  --    --    error = "",
-  --    --    warning = "",
-  --    --    hint = "",
-  --    --    information = "",
-  --    --    other = "﫠"
-  --    --  },
+  --    signs = {
+  --       -- icons / text used for a diagnostic
+  --       error = "",
+  --       warning = "",
+  --       hint = "",
+  --       information = "",
+  --       other = "﫠"
+  --     },
   --   }
   -- end
   -- }
