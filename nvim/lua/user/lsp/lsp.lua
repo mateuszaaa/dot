@@ -5,7 +5,7 @@ end)
 
 lsp.ensure_installed({
   'tsserver',
-  -- 'pylsp',
+  'jedi_language_server',
   'rust_analyzer'
 })
 lsp.skip_server_setup({'rust_analyzer'})

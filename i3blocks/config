@@ -67,7 +67,7 @@ interval=10
 color=#ff8c42
 
 [temperature]
-label=  
+label=
 color=#8ac926
 interval=10
 
@@ -75,7 +75,7 @@ interval=10
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=  
+label= 󰍛 
 separator=true
 interval=30
 color=#1982c4
