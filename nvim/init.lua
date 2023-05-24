@@ -89,26 +89,26 @@ require("packer").startup(function(use)
   
   use("ruanyl/vim-gh-line")
   
-  -- -- Lua
-  -- use { "folke/trouble.nvim",
-  -- requires = "kyazdani42/nvim-web-devicons",
-  -- config = function()
-  --   require("trouble").setup {
-  --    mode = "document_diagnostics",
-  --    auto_preview = false,
-  --    auto_fold = false,
-  --    use_diagnostic_signs = false,
-  --    signs = {
-  --       -- icons / text used for a diagnostic
-  --       error = "",
-  --       warning = "",
-  --       hint = "",
-  --       information = "",
-  --       other = "﫠"
-  --     },
-  --   }
-  -- end
-  -- }
+  -- Lua
+  use { "folke/trouble.nvim",
+  requires = "kyazdani42/nvim-web-devicons",
+  config = function()
+    require("trouble").setup {
+     mode = "document_diagnostics",
+     auto_preview = false,
+     auto_fold = false,
+     use_diagnostic_signs = false,
+     signs = {
+        -- icons / text used for a diagnostic
+        error = "",
+        warning = "",
+        hint = "",
+        information = "",
+        other = "﫠"
+      },
+    }
+  end
+  }
 
   use({
     "j-hui/fidget.nvim",
