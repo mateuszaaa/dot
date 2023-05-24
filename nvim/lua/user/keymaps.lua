@@ -26,6 +26,10 @@ vim.cmd([[command! R RustLastRun ]])
 vim.cmd([[command! D RustLastDebug ]])
 vim.cmd([[command! RR RustRunnables ]])
 vim.cmd([[command! DD RustDebuggables ]])
+vim.cmd([[command! L LspStart ]])
+vim.cmd([[command! LS LspStop ]])
+vim.cmd([[command! HM lua require("harpoon.mark").add_file() ]])
+vim.cmd([[command! H lua require("harpoon.ui").toggle_quick_menu() ]])
 
 vim.cmd([[highlight Normal guibg=none ]])
 

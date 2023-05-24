@@ -128,6 +128,7 @@ require("packer").startup(function(use)
     require"octo".setup()
   end
 }
+use { 'ThePrimeagen/harpoon' }
 
 end)
 

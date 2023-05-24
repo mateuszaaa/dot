@@ -18,6 +18,7 @@ local liblldb_path = path .. "lldb/lib/liblldb.so"
 local rust_tools = require('rust-tools')
 rust_tools.setup({
   server = {
+    autostart = false,
     settings = {
       ["rust-analyzer"] = {
         checkOnSave = {
