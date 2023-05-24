@@ -39,7 +39,7 @@ for_window [class=".*"] border pixel 0
 bindsym $mod+Shift+q kill
 # smart_gaps on
 # smart_borders on
-gaps inner 10
+gaps inner 20
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
@@ -216,7 +216,7 @@ exec --no-startup-id i3-msg "exec feh --bg-scale ~/.config/i3/wall.jpg"
 
 
 for_window [class=".*"] border pixel 0
-for_window [class=".*"] border pixel 2
+for_window [class=".*"] border pixel 1
 
 #autostart
 #
@@ -250,14 +250,14 @@ bar {
     separator #666666
     background #2D2D2D
     statusline #dddddd
-    focused_workspace #0088CC #0088CC #ffffff
+    focused_workspace #FB5607 #FB5607 #ffffff
     active_workspace #333333 #333333 #ffffff
     inactive_workspace #333333 #333333 #888888
     urgent_workspace #2f343a #900000 #ffffff
   }
 }
 
-client.focused #0088CC #0088CC #ffffff #dddddd
+client.focused #FB5607 #FB5607 #ffffff #dddddd
 client.focused_inactive #333333 #333333 #888888 #292d2e
 client.unfocused #333333 #333333 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
