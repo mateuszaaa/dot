@@ -27,6 +27,8 @@ vim.cmd([[command! D RustLastDebug ]])
 vim.cmd([[command! RR RustRunnables ]])
 vim.cmd([[command! DD RustDebuggables ]])
 
+vim.cmd([[highlight Normal guibg=none ]])
+
 vim.cmd([[
     cnoreabbrev W! w!
     cnoreabbrev W1 w!

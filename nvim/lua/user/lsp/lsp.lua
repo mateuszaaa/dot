@@ -25,7 +25,7 @@ rust_tools.setup({
           command = "check",
           extraArgs = {},
         },
-        procMacro = { enable = true },
+        procMacro = { enable = false },
         diagnostics = {
           enable = true,
           disabled = {"unresolved", "unresolved-proc-macro", "unresolved-macro-call"},
@@ -33,7 +33,7 @@ rust_tools.setup({
         },
         cargo = {
           buildScripts = {
-            enable = true,
+            enable = false,
           },
         },
       },
