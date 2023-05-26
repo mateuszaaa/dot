@@ -1,0 +1,15 @@
+#!/bin/bash
+
+notify-send -i display "Display profile" "$AUTORANDR_CURRENT_PROFILE"
+feh --bg-scale ~/.config/i3/wall.jpg
+SORTED=( $(xrandr| grep -E "connected [0-9]+x[0-9]+\+[0-9]+" | cut -d " " -f 1,3 | sed 's/[0-9]\+x[0-9]\++//g' | sort -k 2 | cut -d " " -f 1) )
+
+if [ ${#SORTED[@]} -eq 3 ]; then
+    i3-msg "[workspace=\"(1|2)\"] move workspace to output ${SORTED[0]};"
+    i3-msg "[workspace=\"(3|4|5|6|7)\"] move workspace to output ${SORTED[1]};"
+    i3-msg "[workspace=\"(8|9)\"] move workspace to output ${SORTED[2]};"
+elif [ ${#SORTED[@]} -eq 2 ]; then
+    i3-msg "[workspace=\"(1|2|3|4|5)\"] move workspace to output ${SORTED[0]};"
+    i3-msg "[workspace=\"(6|7|8|9)\"] move workspace to output ${SORTED[1]};"
+fi
+

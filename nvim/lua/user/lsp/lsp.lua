@@ -7,6 +7,7 @@ end)
 
 lsp.ensure_installed({
   'bashls',
+  'jsonls',
   'tsserver',
   'jedi_language_server',
   'rust_analyzer'

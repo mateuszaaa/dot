@@ -129,6 +129,7 @@ require("packer").startup(function(use)
   end
 }
 use { 'ThePrimeagen/harpoon' }
+use { 'chrisbra/NrrwRgn' }
 use {
   'rmagatti/auto-session',
   config = function()
