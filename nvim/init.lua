@@ -129,6 +129,15 @@ require("packer").startup(function(use)
   end
 }
 use { 'ThePrimeagen/harpoon' }
+use {
+  'rmagatti/auto-session',
+  config = function()
+    require("auto-session").setup {
+      log_level = "error",
+      auto_session_suppress_dirs = { "~/", "~/Downloads", "/"},
+    }
+  end
+}
 
 end)
 
