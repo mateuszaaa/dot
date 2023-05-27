@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+DEFAULT_STATE=${DEFAULT_STATE:-0}
+STATE_ON=1
+STATE_OFF=0
+SOCK=/tmp/bt_${ADDR}.sock
+
+
+function get_name {
+    bluetoothctl devices | grep $1 | cut -d " " -f 3
+}
+
+function get_status {
+    if  bluetoothctl info $1 | grep "Connected.*yes" > /dev/null ; then
+        echo ON
+    else
+        echo OFF
+    fi
+}
+
+function connect {
+    if ! bluetoothctl power on > /dev/null; then
+        echo "ERR"
+        return
+    fi
+    if ! bluetoothctl connect $1 > /dev/null; then
+        echo "ERR"
+        return
+    fi
+    echo $STATE_ON > $SOCK
+}
+
+function disconnect {
+    if ! bluetoothctl disconnect $1 > /dev/null; then
+        echo "ERR"
+        return
+    fi
+    echo $STATE_OFF > $SOCK
+}
+
+function toggle {
+    notify-send "toggle $1"
+    if [ "$(cat $SOCK)" == $STATE_ON ]; then
+        disconnect $1
+    else
+        connect $1
+    fi
+}
+
+function restart {
+    if ! bluetoothctl disconnect $1 > /dev/null; then
+        echo "ERR"
+        return
+    fi
+    if ! bluetoothctl remove $1 > /dev/null; then
+        echo "ERR"
+        return
+    fi
+    if ! bluetoothctl trust $1 > /dev/null; then
+        echo "ERR"
+        return
+    fi
+    if ! bluetoothctl scan on > /dev/null; then
+        echo "ERR"
+        return
+    fi
+    if ! bluetoothctl pair $1 > /dev/null; then
+        echo "ERR"
+        return
+    fi
+    if ! bluetoothctl connect $1 > /dev/null; then
+        echo "ERR"
+        return
+    fi
+    echo $STATE_ON > $SOCK
+    echo OFF
+}
+
+
+if [ ! -e $SOCK ]; then
+    if $[ "$DEFAULT_STATE" == "$STATE_ON" ]; then
+        connect $ADDR
+    else
+        disconnect $ADDR
+    fi
+fi
+
+LEFT_BUTTON=1
+RIGHT_BUTTON=2
+MIDDLE_BUTTON=3
+
+case "$BLOCK_BUTTON" in
+    1) ERR=$(toggle $ADDR) ;;
+    2) ERR=$(toggle $ADDR) ;;
+    3) ERR=$(toggle $ADDR) ;;
+esac
+
+NAME=${LABEL:-$(get_name $ADDR)}
+STATUS=${ERR:-$NAME $(get_status $ADDR)}
+
+echo $STATUS
+
+
+

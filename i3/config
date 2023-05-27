@@ -215,7 +215,7 @@ exec --no-startup-id i3-msg 'exec setxkbmap -layout pl'
 # exec --no-startup-id i3-msg 'exec kdeconnect-indicator'
 exec --no-startup-id i3-msg 'exec pasystray'
 exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1'
-exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.5'
+# exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.5'
 exec --no-startup-id i3-msg "exec feh --bg-scale ~/.config/i3/wall.jpg"
 # exec --no-startup-id i3-msg "warpd"
 
