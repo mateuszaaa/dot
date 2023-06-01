@@ -43,6 +43,12 @@ markup=none
 #color=#0088CC
 #separator=true
 #
+#
+
+[pass]
+full_text=󰌋
+command=bash -c "[ \"$BLOCK_BUTTON\" == '1' ] && rofi-pass; [ \"$BLOCK_BUTTON\" == '3' ] && rofi-pass --insert;"
+
 [crypto]
 SYMBOL=KSMUSDT
 label=KSM: 
@@ -54,6 +60,12 @@ SYMBOL=BTCUSDT
 label=BTC: 
 interval=3600
 color=#b100e8
+
+[lid]
+ON_LABEL=
+OFF_LABEL=󰛧
+interval=60
+color=#ffca3a
 
 [bluetooth]
 ADDR=98:80:BB:40:C0:98
@@ -75,6 +87,13 @@ LABEL=Bullets
 DEFAULT_STATE=0
 interval=5
 color=#2a9d8f
+
+# [bluetooth4]
+# ADDR=98:09:CF:D2:20:91
+# LABEL=Bullets
+# DEFAULT_STATE=0
+# interval=5
+# color=#2a9d8f
 
 # [bluetooth4]
 # ADDR=98:09:CF:D2:20:91
@@ -165,7 +184,7 @@ color=#ff006e
 [time]
 label=  
 command=date '+%H:%M:%S'
-interval=5
+interval=1
 color=#43bccd
 
 # Date Time

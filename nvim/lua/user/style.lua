@@ -42,3 +42,11 @@ vim.opt.completeopt = "menu,noinsert,noselect"
 
 -- Avoid showing extra messages when using completion
 vim.opt.shortmess = vim.opt.shortmess + "c"
+
+vim.g.gitgutter_sign_added = '┃'
+vim.g.gitgutter_sign_removed = '┃'
+vim.g.gitgutter_sign_modified = '┃'
+
+-- highlight GitGutterAdd    guifg=#009900 ctermfg=2
+-- highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+-- highlight GitGutterDelete guifg=#ff2222 ctermfg=1
