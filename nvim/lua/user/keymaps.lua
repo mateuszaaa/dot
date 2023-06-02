@@ -8,6 +8,11 @@ vim.keymap.set('n', '<Leader><Leader>', '<cmd>HopWord<cr>', {noremap = true, sil
 vim.keymap.set('n', '<Leader>t', '<cmd>TroubleToggle document_diagnostics<cr>', {noremap = true, silent = true})
 vim.keymap.set('n', '<Leader>r', '<cmd>RustRunnables<cr>', {noremap = true, silent = true})
 
+
+vim.cmd([[
+  set updatetime=100
+]])
+
 vim.cmd([[
   augroup packer_user_config
     autocmd!
