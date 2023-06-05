@@ -79,16 +79,17 @@ require("packer").startup(function(use)
   
   use("tpope/vim-fugitive")
   use("airblade/vim-gitgutter")
+  use("lewis6991/gitsigns.nvim")
   use("tomtom/tcomment_vim")
   use("tanvirtin/monokai.nvim")
-  
+
   -- treesitter
   use("nvim-treesitter/nvim-treesitter")
   use("p00f/nvim-ts-rainbow")
   use("windwp/nvim-autopairs")
-  
+
   use("ruanyl/vim-gh-line")
-  
+
   -- Lua
   use { "folke/trouble.nvim",
   requires = "kyazdani42/nvim-web-devicons",
@@ -97,15 +98,7 @@ require("packer").startup(function(use)
      mode = "document_diagnostics",
      auto_preview = false,
      auto_fold = false,
-     use_diagnostic_signs = false,
-     signs = {
-        -- icons / text used for a diagnostic
-        error = "",
-        warning = "",
-        hint = "",
-        information = "",
-        other = "﫠"
-      },
+     use_diagnostic_signs = true,
     }
   end
   }
@@ -130,10 +123,6 @@ require("packer").startup(function(use)
 }
 use { 'ThePrimeagen/harpoon' }
 use { 'chrisbra/NrrwRgn' }
-use {
-  'lewis6991/gitsigns.nvim',
-  -- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
-}
 use {
   'rmagatti/auto-session',
   config = function()

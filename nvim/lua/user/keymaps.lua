@@ -3,10 +3,15 @@ vim.cmd [[ tnoremap <Esc> <C-\><C-n> ]]
 
 vim.keymap.set({'n', 'v'}, 'H', '^', {noremap = true, silent = true})
 vim.keymap.set({'n', 'v'}, 'L', '$', {noremap = true, silent = true})
+vim.keymap.set({'n', 'v'}, '*', '*``', {noremap = true, silent = true})
+vim.keymap.set({'n', 'v'}, '<C-l>', '<cmd>let @/=""<cr>', {noremap = true, silent = true})
 vim.keymap.set('n', '<C-p>', '<cmd>Telescope find_files<cr>', {noremap = true, silent = true})
 vim.keymap.set('n', '<Leader><Leader>', '<cmd>HopWord<cr>', {noremap = true, silent = true})
 vim.keymap.set('n', '<Leader>t', '<cmd>TroubleToggle document_diagnostics<cr>', {noremap = true, silent = true})
 vim.keymap.set('n', '<Leader>r', '<cmd>RustRunnables<cr>', {noremap = true, silent = true})
+vim.keymap.set('n', '<leader>do', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>d[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>d]', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
 
 
 vim.cmd([[
@@ -28,9 +33,11 @@ vim.cmd([[
 
 
 vim.cmd([[command! R RustLastRun ]])
+vim.cmd([[command! RCA RustCodeAction ]])
 vim.cmd([[command! D RustLastDebug ]])
 vim.cmd([[command! RR RustRunnables ]])
 vim.cmd([[command! DD RustDebuggables ]])
+vim.cmd([[command! TT Telescope treesitter  ]])
 vim.cmd([[command! L LspStart ]])
 vim.cmd([[command! LS LspStop ]])
 vim.cmd([[command! LR LspRestart ]])

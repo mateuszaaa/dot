@@ -84,6 +84,28 @@ cmp.setup({
 
 
 require'nvim-treesitter.configs'.setup {
+  textobjects = {
+        move = {
+      enable = true,
+      set_jumps = false, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["])"] = "@function.outer",
+        ["]]"] = { query = "@class.outer", desc = "Next class start" },
+      },
+      goto_next_end = {
+        ["])"] = "@function.outer",
+        ["]["] = "@class.outer",
+      },
+      -- goto_previous_start = {
+      --   ["[m"] = "@function.outer",
+      --   ["[["] = "@class.outer",
+      -- },
+      -- goto_previous_end = {
+      --   ["[M"] = "@function.outer",
+      --   ["[]"] = "@class.outer",
+      -- },
+    },
+  },
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { "lua", "vim", "vimdoc", "query", "json", "rust" },
 
@@ -109,13 +131,13 @@ require'nvim-treesitter.configs'.setup {
     -- list of language that will be disabled
     -- disable = { "c", "rust" },
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-    disable = function(lang, buf)
-        local max_filesize = 100 * 1024 -- 100 KB
-        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-        if ok and stats and stats.size > max_filesize then
-            return true
-        end
-    end,
+    -- disable = function(lang, buf)
+    --     local max_filesize = 100 * 1024 -- 100 KB
+    --     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+    --     if ok and stats and stats.size > max_filesize then
+    --         return true
+    --     end
+    -- end,
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -124,3 +146,12 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+
+vim.diagnostic.config({
+  virtual_text = false,
+  severity_sort = true,
+  float = {
+    source = "always",  -- Or "if_many"
+  },
+})
