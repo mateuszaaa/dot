@@ -1,0 +1,25 @@
+#!/bin/bash
+test -z $1 && echo "need magnet link!
+$0 <magnet link>" && exit -1
+
+HOST=192.168.1.2
+PORT=9091
+# USER=User
+# NOTE: I had issues using passwords with semicolons (;) in them, 
+#       you might want to stay away from them
+# PASS=pass
+
+LINK="$1"
+# set true if you want every torrent to be paused initially
+#PAUSED="true"
+PAUSED="false"
+# SESSID=$(curl --silent --anyauth --user $USER:$PASS "http://$HOST:$PORT/transmission/rpc" | sed 's/.*<code>//g;s/<\/code>.*//g')
+SESSID=$(curl --silent --anyauth "http://$HOST:$PORT/transmission/rpc" | sed 's/.*<code>//g;s/<\/code>.*//g')
+echo $SESSID
+curl --silent --anyauth --header "$SESSID" "http://$HOST:$PORT/transmission/rpc" -d "{\"method\":\"torrent-add\",\"arguments\":{\"paused\":${PAUSED},\"filename\":\"${LINK}\"}}"
+
+if [ $? -eq 0 ]; then
+    notify-send "successful added new torrent $1"
+else
+    notify-send "problem adding torrent"
+fi

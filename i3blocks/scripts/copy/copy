@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+
+ON_LABEL=${ON_LABEL:-ON}
+OFF_LABEL=${OFF_LABEL:-OFF}
+MUTED_COLOR="#a0a0a0"
+
+
+LEFT_BUTTON=1
+RIGHT_BUTTON=2
+MIDDLE_BUTTON=3
+function get_status {
+    if pgrep systemd-inhibit > /dev/null ; then
+        echo ON
+    else
+        echo OFF
+    fi
+}
+
+function toggle {
+    if [ "$(get_status)" == "ON" ]; then
+        pkill -9 systemd-inhibit
+    else
+        nohup systemd-inhibit --what=handle-lid-switch sleep 1d > /dev/null &
+    fi
+}
+
+case "$BLOCK_BUTTON" in
+    2) toggle ;;
+esac
+
+if [ "$(get_status)" == "ON" ]; then
+    echo $ON_LABEL
+    echo $ON_LABEL
+else
+    echo "$OFF_LABEL"
+    echo "$OFF_LABEL"
+    echo "$MUTED_COLOR"
+fi
+

@@ -25,10 +25,12 @@ vim.opt.listchars.eol='↲'
 vim.opt.listchars.nbsp='␣'
 
 -- colors for \\ 
-vim.cmd("hi HopNextKey guifg=Red gui=bold")
-vim.cmd("hi HopNextKey1 guifg=Orange gui=bold")
-vim.cmd("hi HopNextKey2 guifg=Orange gui=bold")
-vim.cmd("hi HopUnmatched guifg=#999999")
+vim.cmd("hi HopNextKey guibg=black guifg=Red gui=bold")
+vim.cmd("hi HopNextKey1 guibg=black guifg=Cyan gui=bold")
+vim.cmd("hi HopNextKey2 guibg=black guifg=Orange gui=bold")
+vim.cmd("hi Hopmatched guifg=#999999")
+vim.cmd("hi DiffText guifg=#ffffff guibg=#FB5607")
+vim.cmd("hi DiffChange guibg=#6F2783")
 
 -- highlight currently selected word
 vim.cmd("hi CurrentWordTwins guifg=None guibg=#8CCBEA guifg=#000000 gui=underline,bold")

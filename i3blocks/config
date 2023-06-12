@@ -44,6 +44,9 @@ markup=none
 #separator=true
 #
 #
+[clipboard]
+full_text=C
+command=xclip -selection primary -o | sed 's/{/\n{\n/g' | sed 's/}/\n}\n/g' | awk 'BEGIN { indent = 0 } { if ($0 ~ /^}$/) indent -= 2; printf "%*s%s\n", indent, "", $0; if ($0 ~ /^{$/) indent += 2 }' |  xclip -selection primary
 
 [pass]
 full_text=󰌋
