@@ -33,12 +33,16 @@ vim.cmd("hi DiffText guifg=#ffffff guibg=#FB5607")
 vim.cmd("hi DiffChange guibg=#6F2783")
 
 -- highlight currently selected word
-vim.cmd("hi CurrentWordTwins guifg=None guibg=#8CCBEA guifg=#000000 gui=underline,bold")
+vim.cmd("hi CurrentWordTwins guifg=None guibg=#6F2783 guifg=#000000 gui=underline,bold")
 vim.cmd("hi CurrentWord guifg=None guibg=None gui=bold")
+
+vim.cmd("hi Visual guibg=#6F2783")
+vim.cmd("hi CursorLine guibg=#095D5E")
+vim.cmd("hi CursorColumn guibg=#095D5E")
 
 -- view
 vim.opt.cursorcolumn = true
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 vim.opt.signcolumn = "auto:2"
 vim.opt.completeopt = "menu,noinsert,noselect"
 

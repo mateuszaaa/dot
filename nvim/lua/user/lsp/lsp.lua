@@ -47,7 +47,7 @@ rust_tools.setup({
       -- vim.keymap.set('n', '<leader>ca', rust_tools.hover_actions.hover_actions, {buffer = bufnr})
     end,
     dap = {
-      adatper = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
+	    adatper = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path)
     }
   }
 })
@@ -123,7 +123,7 @@ require'nvim-treesitter.configs'.setup {
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
 
   highlight = {
-    enable = true,
+    enable = disable,
 
     -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is

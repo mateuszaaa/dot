@@ -123,15 +123,16 @@ require("packer").startup(function(use)
 }
 use { 'ThePrimeagen/harpoon' }
 use { 'chrisbra/NrrwRgn' }
-use {
-  'rmagatti/auto-session',
-  config = function()
-    require("auto-session").setup {
-      log_level = "error",
-      auto_session_suppress_dirs = { "~/", "~/Downloads", "/"},
-    }
-  end
-}
+use { 'rickhowe/spotdiff.vim' }
+-- use {
+--   'rmagatti/auto-session',
+--   config = function()
+--     require("auto-session").setup {
+--       log_level = "error",
+--       auto_session_suppress_dirs = { "~/", "~/Downloads", "/"},
+--     }
+--   end
+-- }
 
 end)
 
