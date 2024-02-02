@@ -23,18 +23,18 @@
 percentage=$(acpi | grep -Eo "[0-9]+%" | tr -d '%')
 
 function bar {
-    CHAR='▄'
+    CHAR='█'
 
     ACTUAL=$1
     MAX=$2
     for i in `seq $2`; do
 
         if [ ${i} -lt $(awk "BEGIN {print int($MAX/100*$ACTUAL)}") ]; then
-            printf "▅"
+            printf "▇"
         else
             printf "▁"
         fi
     done
 }
 
-echo $(bar $percentage 12)
+echo $(bar $percentage 10)

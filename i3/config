@@ -14,7 +14,7 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:monospace 8
-font pango:System San Francisco Display 8
+font pango:MesloLGS NF Bold 10
 
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -44,8 +44,7 @@ gaps inner 20
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec "rofi -combi-modi window,run -show combi"
-bindsym $mod+x exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
-bindsym $mod+c exec "scrot -o -s /tmp/ss.png && pinta /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
+bindsym $mod+c exec "rofi -modi 'clipboard:greenclip print' -show clipboard"
 bindsym Print --release exec "scrot -o -s /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
 bindsym $mod+Print --release exec "scrot -o -s /tmp/ss.png && pinta /tmp/ss.png && xclip -selection clipboard -t image/png -i /tmp/ss.png"
 bindsym $mod+m exec "/usr/bin/rofi-pass"
@@ -55,7 +54,7 @@ bindsym XF86AudioLowerVolume exec "amixer set 'Master' 10%- unmute"
 bindsym XF86AudioMute exec "amixer set 'Capture' toggle"
 bindsym XF86Sleep exec "systemctl -i suspend"
 bindsym $mod+g exec "gvim -c ':CtrlPMRUFiles'"
-bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
+bindsym $mod+n exec i3-msg bar hidden_state toggle bar-tray
 bindsym $mod+b exec rofi-bluetooth
 bindsym $mod+o workspace next
 bindsym $mod+y workspace prev
@@ -211,6 +210,7 @@ for_window [window_role="pop-up"] floating enable
 # exec --no-startup-id i3-msg 'exec blueman-applet'
 exec --no-startup-id i3-msg 'exec autorandr --change'
 exec --no-startup-id i3-msg 'exec nm-applet'
+exec --no-startup-id i3-msg 'exec greenclip daemon'
 exec --no-startup-id i3-msg 'exec setxkbmap -layout pl'
 # exec --no-startup-id i3-msg 'exec kdeconnect-indicator'
 exec --no-startup-id i3-msg 'exec pasystray'
@@ -245,12 +245,31 @@ set $PANEL_ACTIVE_TEXT "#ffffff"
 set $PANEL_INACTIVE_TEXT "#888888"
 
 bar {
+  id bar-primary
+  tray_output none
   position top
   status_command i3blocks -c ~/.config/i3blocks/config
-  # font pango:System San Francisco Display Bold 10
-  # install awesome-terminal-fonts
-  # fc-cache -f -v
-  font pango: Font Awesome, System San Francisco Display Bold 10
+  font pango:MesloLGS NF Bold 12
+  colors {
+    separator #666666
+    background #2D2D2D
+    statusline #dddddd
+    focused_workspace #FB5607 #FB5607 #ffffff
+    active_workspace #333333 #333333 #ffffff
+    inactive_workspace #333333 #333333 #888888
+    urgent_workspace #2f343a #900000 #ffffff
+  }
+}
+
+bar {
+  id bar-tray
+  tray_padding 1
+  tray_output primary
+  position top
+  status_command i3blocks -c ~/.config/i3blocks/config
+  font pango:MesloLGS NF Bold 12
+  mode hide
+  modifier none
   colors {
     separator #666666
     background #2D2D2D

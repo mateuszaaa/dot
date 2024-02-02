@@ -11,7 +11,7 @@ AUDIO_MED_SYMBOL=${AUDIO_MED_SYMBOL:-'  '}
 AUDIO_LOW_THRESH=${AUDIO_LOW_THRESH:-0}
 AUDIO_LOW_SYMBOL=${AUDIO_LOW_SYMBOL:-'  '}
 
-AUDIO_MUTED_SYMBOL=${AUDIO_MUTED_SYMBOL:-'  '}
+AUDIO_MUTED_SYMBOL=${AUDIO_MUTED_SYMBOL:-'󰝟  '}
 
 AUDIO_DELTA=${AUDIO_DELTA:-5}
 
@@ -108,10 +108,10 @@ function set_default_playback_device_next {
 
 case "$BLOCK_BUTTON" in
     1) set_default_playback_device_next ;;
-    2) amixer -q -D $MIXER sset $SCONTROL $CAPABILITY toggle ;;
+    2) pamixer -t;;
     3) set_default_playback_device_next -1 ;;
-    4) amixer -q -D $MIXER sset $SCONTROL $CAPABILITY $AUDIO_DELTA%+ ;;
-    5) amixer -q -D $MIXER sset $SCONTROL $CAPABILITY $AUDIO_DELTA%- ;;
+    4) pamixer -i 3;;
+    5) pamixer -d 3;;
 esac
 
 function print_format {
@@ -151,7 +151,7 @@ sed 's/.*= "\(.*\)".*/\1/')
     fi
 
     if [[ $ACTIVE = "" ]] ; then
-        echo "Sound inactive"
+        echo "󰋋"
         COLOR='#222225'
     fi
 

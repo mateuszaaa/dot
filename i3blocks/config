@@ -29,53 +29,57 @@ command=/home/dev/.config/i3blocks/scripts/$BLOCK_NAME/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
-# Volume indicator
-#
-# The first parameter sets the step (and units to display)
-# The second parameter overrides the mixer selection
-# See the script for details.
-
-#
-#[cpu_usage]
-#label=CPU 
-#interval=10
-#min_width=CPU 100.00%
-#color=#0088CC
-#separator=true
-#
-#
-[clipboard]
-full_text=C
-command=xclip -selection primary -o | sed 's/{/\n{\n/g' | sed 's/}/\n}\n/g' | awk 'BEGIN { indent = 0 } { if ($0 ~ /^}$/) indent -= 2; printf "%*s%s\n", indent, "", $0; if ($0 ~ /^{$/) indent += 2 }' |  xclip -selection primary
-
 [pass]
 full_text=󰌋
 command=bash -c "[ \"$BLOCK_BUTTON\" == '1' ] && rofi-pass; [ \"$BLOCK_BUTTON\" == '3' ] && rofi-pass --insert;"
 
+
+[clip]
+label=" "
+command=bash -c 'echo; [[ -n "$BLOCK_BUTTON" ]] && rofi -modi "clipboard:greenclip print" -show clipboard'
+interval=once
+color=#fb5607
+
+
 [crypto]
 SYMBOL=KSMUSDT
-label=KSM: 
+label=󱥸:
 interval=3600
-color=#b100e8
+color=#ff006e
+# color=#b100e8
+# color=#ffbe0b
 
 [crypto]
 SYMBOL=BTCUSDT
-label=BTC: 
+label=:
 interval=3600
-color=#b100e8
+# color=#b100e8
+# color=#ffbe0b
+color=#ff006e
 
-[lid]
-ON_LABEL=
-OFF_LABEL=󰛧
-interval=60
-color=#ffca3a
 
-#[bluetooth]
-#ADDR=98:80:BB:40:C0:98
-#LABEL=SoundPeats
-#DEFAULT_STATE=0
-#interval=5
-#color=#2a9d8f
+[bluetooth]
+ADDR=98:80:BB:40:C0:98
+LABEL= SPeats Mini
+DEFAULT_STATE=0
+interval=5
+color=#fb5607
+
+
+[bluetooth2]
+ADDR=E8:EE:CC:3E:98:70
+LABEL= Q45
+DEFAULT_STATE=0
+interval=5
+color=#fb5607
+
+
+[bluetooth3]
+ADDR=D6:AC:F6:F1:F6:9B
+LABEL= Kyria
+DEFAULT_STATE=1
+interval=5
+color=#fb5607
 
 #[bluetooth2]
 #ADDR=D6:AC:F6:F1:F6:9B
@@ -106,30 +110,30 @@ color=#ffca3a
 # color=#2a9d8f
 
 
-[huion]
-label=   
-interval=once
-color=#ffca3a
+# [huion]
+# label=   
+# interval=once
+# color=#ff06ee
 
 
 [load_average]
-label=   
+label= 
 interval=10
-color=#ff8c42
+# color=#ff8c42
+# color=#ff06ee
+color=#ff006e
 
 [temperature]
-label=
-color=#8ac926
-interval=10
+label=󱃂 
+# color=#8ac926
+# color=#ff06ee
+interval=1
+color=#ff006e
 
 # Memory usage
 #
 # The type defaults to "mem" if the instance is not specified.
-[memory]
-label= 󰍛 
-separator=true
-interval=30
-color=#1982c4
+# color=#1982c4
 #
 #[memory]
 #label=SWAP: 
@@ -145,34 +149,51 @@ color=#1982c4
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label=  
+label= 
 interval=30
-color=#b100e8
+# color=#b100e8
+color=#ff006e
+
+[memory]
+label=󰍛 
+separator=true
+interval=30
+# color=#ff06ee
+color=#ff006e
 
 # Network interface monitoring
 #
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
 [iface]
-#IFACE=wlan0
-label=  
+IFACE=wlp3s0
+label=󰛳 
 interval=10
 separator=false
 separator=true
-color=#ffbe0b
+# color=#ffbe0b
+color=#fb5607
 
-[wifi]
-label=wifi:
-interval=10
-separator=true
+# [wifi]
+# label=wifi:
+# interval=10
+# INTERFACE=wlp3s0
+# separator=true
 
 # interval=1
 
+
+
+[battery]
+label=
+interval=30
+color=#ff006e
+
 [volume-pipewire]
 # label=  
-interval=once
+interval=1
 signal=1
-#MIXER=[determined automatically]
+MIXER=pamixer
 #SCONTROL=[determined automatically]
 ##exposed format variables: ${SYMB}, ${VOL}, ${INDEX}, ${NAME}
 LONG_FORMAT="${SYMB} ${VOL}% ${NAME}"
@@ -183,10 +204,12 @@ LONG_FORMAT="${SYMB} ${VOL}% ${NAME}"
 #AUDIO_LOW_THRESH=0
 #AUDIO_LOW_SYMBOL='  '
 #AUDIO_DELTA=5
-DEFAULT_COLOR="#ffffff"
-MUTED_COLOR="#a0a0a0"
+# DEFAULT_COLOR="#ffffff"
+# MUTED_COLOR=#fb5607
+DEFAULT_COLOR=#fb5607
 USE_ALSA_NAME=0
 USE_DESCRIPTION=1
+# color=#fb5607
 ## SUBSCRIBE=1 requires interval=persist and always uses LONG_FORMAT
 #SUBSCRIBE=0
 #
@@ -196,17 +219,10 @@ USE_DESCRIPTION=1
 # DEFAULT_COLOR=#fb5607
 
 
-
-[battery]
-label= 
-interval=30
-color=#ff006e
-
 [time]
-label=  
-command=date '+%H:%M:%S'
+command=bash -c 'case  $(expr $(date +%s) % 4)  in "0") echo "$(date "+%H:%M:%S") 󱥸 " ;; "1") echo "$(date "+%H:%M:%S") 󱗼 " ;; "2") echo "$(date "+%H:%M:%S") 󱗾 " ;; "3") echo "$(date "+%H:%M:%S") 󱗽 " ;; esac; [[ -n "$BLOCK_BUTTON" ]] && i3-msg bar hidden_state toggle bar-tray'
 interval=1
-color=#43bccd
+color=#fb5607
 
 # Date Time
 #
