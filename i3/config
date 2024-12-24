@@ -216,33 +216,12 @@ exec --no-startup-id i3-msg 'exec setxkbmap -layout pl'
 exec --no-startup-id i3-msg 'exec pasystray'
 exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1'
 # exec --no-startup-id i3-msg 'exec xinput --set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.5'
-exec --no-startup-id i3-msg "exec feh --bg-scale ~/.config/i3/wall.jpg"
+exec --no-startup-id i3-msg "exec feh --bg-scale ~/.config/i3/space.jpg"
 # exec --no-startup-id i3-msg "warpd"
 
 
 for_window [class=".*"] border pixel 0
 for_window [class=".*"] border pixel 1
-
-#autostart
-#
-set $FOCUS_BORDER "#3b1261"
-set $FOCUS_BACKGROUND "#2B1B8D"
-set $FOCUS_TEXT "#ffffff"
-set $FOCUS_INDICATOR "#f0fff0"
-
-set $UNFOCUS_BORDER "#2F343F"
-set $UNFOCUS_BACKGROUND "#2F343F"
-set $UNFOCUS_TEXT "#888888"
-set $UNFOCUS_INDICATOR "#292d2e"
-#
-set $URGENT_BORDER "#ff0000"
-set $URGENT_BACKGROUND "#ff0000"
-set $URGENT_TEXT "#ffffff"
-set $URGENT_INDICATOR "#000000"
-
-set $PANEL_BACKGROUND "#000000"
-set $PANEL_ACTIVE_TEXT "#ffffff"
-set $PANEL_INACTIVE_TEXT "#888888"
 
 bar {
   id bar-primary
@@ -252,7 +231,8 @@ bar {
   font pango:MesloLGS NF Bold 12
   colors {
     separator #666666
-    background #2D2D2D
+    # background #1D1E26 #2D2D2D
+    background #00000000 #2D2D2D
     statusline #dddddd
     focused_workspace #FB5607 #FB5607 #ffffff
     active_workspace #333333 #333333 #ffffff
@@ -272,7 +252,7 @@ bar {
   modifier none
   colors {
     separator #666666
-    background #2D2D2D
+    background #1D1E26 #2D2D2D
     statusline #dddddd
     focused_workspace #FB5607 #FB5607 #ffffff
     active_workspace #333333 #333333 #ffffff

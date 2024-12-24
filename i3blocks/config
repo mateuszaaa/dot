@@ -27,59 +27,59 @@
 # Change $SCRIPT_DIR to the location of your scripts!
 command=/home/dev/.config/i3blocks/scripts/$BLOCK_NAME/$BLOCK_NAME
 separator_block_width=15
-markup=none
+markup=pango
 
-[pass]
-full_text=󰌋
-command=bash -c "[ \"$BLOCK_BUTTON\" == '1' ] && rofi-pass; [ \"$BLOCK_BUTTON\" == '3' ] && rofi-pass --insert;"
+# [pass]
+# full_text=󰌋
+# command=bash -c "[ \"$BLOCK_BUTTON\" == '1' ] && rofi-pass; [ \"$BLOCK_BUTTON\" == '3' ] && rofi-pass --insert;"
+#
+#
+# [clip]
+# label=" "
+# command=bash -c 'echo; [[ -n "$BLOCK_BUTTON" ]] && rofi -modi "clipboard:greenclip print" -show clipboard'
+# interval=once
+# color=#fb5607
+#
 
-
-[clip]
-label=" "
-command=bash -c 'echo; [[ -n "$BLOCK_BUTTON" ]] && rofi -modi "clipboard:greenclip print" -show clipboard'
-interval=once
-color=#fb5607
-
-
-[crypto]
-SYMBOL=KSMUSDT
-label=󱥸:
-interval=3600
-color=#ff006e
-# color=#b100e8
-# color=#ffbe0b
-
-[crypto]
-SYMBOL=BTCUSDT
-label=:
-interval=3600
-# color=#b100e8
-# color=#ffbe0b
-color=#ff006e
-
-
-[bluetooth]
-ADDR=98:80:BB:40:C0:98
-LABEL= SPeats Mini
-DEFAULT_STATE=0
-interval=5
-color=#fb5607
+# [crypto]
+# SYMBOL=KSMUSDT
+# label=󱥸:
+# interval=3600
+# color=#ff006e
+# # color=#b100e8
+# # color=#ffbe0b
+#
+# [crypto]
+# SYMBOL=BTCUSDT
+# label=:
+# interval=3600
+# # color=#b100e8
+# # color=#ffbe0b
+# color=#ff006e
 
 
-[bluetooth2]
-ADDR=E8:EE:CC:3E:98:70
-LABEL= Q45
-DEFAULT_STATE=0
-interval=5
-color=#fb5607
-
-
-[bluetooth3]
-ADDR=D6:AC:F6:F1:F6:9B
-LABEL= Kyria
-DEFAULT_STATE=1
-interval=5
-color=#fb5607
+# [bluetooth]
+# ADDR=98:80:BB:40:C0:98
+# LABEL= SPeats Mini
+# DEFAULT_STATE=0
+# interval=5
+# color=#fb5607
+#
+#
+# [bluetooth2]
+# ADDR=E8:EE:CC:3E:98:70
+# LABEL= Q45
+# DEFAULT_STATE=0
+# interval=5
+# color=#fb5607
+#
+#
+# [bluetooth3]
+# ADDR=D6:AC:F6:F1:F6:9B
+# LABEL= Kyria
+# DEFAULT_STATE=1
+# interval=5
+# color=#fb5607
 
 #[bluetooth2]
 #ADDR=D6:AC:F6:F1:F6:9B
@@ -116,12 +116,15 @@ color=#fb5607
 # color=#ff06ee
 
 
+
 [load_average]
 label= 
+# label=<span color='#707070'>LOAD </span>
+# color=#ffffff
+# label=<span color='#ff0000'>Label:</span>   # Red text
 interval=10
 # color=#ff8c42
 # color=#ff06ee
-color=#ff006e
 
 [temperature]
 label=󱃂 
@@ -149,10 +152,10 @@ color=#ff006e
 # The script may be called with a optional argument to set the alert
 # (defaults to 10 for 10%).
 [disk]
-label= 
+label= 
 interval=30
 # color=#b100e8
-color=#ff006e
+# color=#ff006e
 
 [memory]
 label=󰍛 
@@ -256,7 +259,7 @@ color=#fb5607
 # bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
 #[keyindicator]
 #KEY=CAPS
-#markup=pango
+# markup=pango
 #interval=once
 #signal=11
 
