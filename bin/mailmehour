@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cat <<EOF | msmtp -a gmail mat13mn@gmail.com
+To: mat13mn@gmail.com
+From: mat13mn@gmail.com
+Subject: Hours Report
+
+$@
+EOF
